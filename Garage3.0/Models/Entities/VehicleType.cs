@@ -7,5 +7,8 @@ namespace Garage3._0.Models.Entities
 {
     public class VehicleType
     {
+        public int VeihcleTypeId { get; set; }
+        public string TypeName { get; set; }
+        public int NumberOfSpots { get; set; }
     }
 }
