@@ -44,7 +44,7 @@ namespace Garage3._0.Controllers
         }
 
         // GET: Members/Create
-        public IActionResult Create()
+        public IActionResult Add()
         {
             return View();
         }
@@ -54,7 +54,7 @@ namespace Garage3._0.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Personnummer,MbShipRegDate,ProEndDate")] Member member)
+        public async Task<IActionResult> Add( Member member)
         {
             if (ModelState.IsValid)
             {
@@ -117,7 +117,7 @@ namespace Garage3._0.Controllers
         }
 
         // GET: Members/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Remove(int? id)
         {
             if (id == null)
             {
@@ -137,7 +137,7 @@ namespace Garage3._0.Controllers
         // POST: Members/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> RemoveConfirmed(int id)
         {
             var member = await db.Members.FindAsync(id);
             db.Members.Remove(member);
