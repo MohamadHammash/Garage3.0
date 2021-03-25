@@ -23,7 +23,8 @@ namespace Garage3._0.Models.Entities
         public DateTime MbShipRegDate { get; set; }
         [Display(Name = "Pro valid until")]
         public DateTime ProEndDate { get; set; }
-       
+        public string FullName => $"{FirstName} {LastName}";
+
 
         // nav prop
         public ICollection<Vehicle> Vehicles { get; set; }

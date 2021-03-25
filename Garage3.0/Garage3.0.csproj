@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\ViewModels\MembersViewModels\" />
     <Folder Include="Models\ViewModels\VehicleTypesViewModels\" />
     <Folder Include="Models\ViewModels\VehiclesViewModels\" />
   </ItemGroup>
