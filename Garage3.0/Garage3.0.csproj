@@ -6,10 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\ViewModels\" />
+    <Folder Include="Models\ViewModels\MembersViewModels\" />
+    <Folder Include="Models\ViewModels\VehicleTypesViewModels\" />
+    <Folder Include="Models\ViewModels\VehiclesViewModels\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Bogus" Version="33.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.4">
       <PrivateAssets>all</PrivateAssets>

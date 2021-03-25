@@ -12,17 +12,17 @@ namespace Garage3._0.Controllers
 {
     public class MembersController : Controller
     {
-        private readonly Garage3_0Context _context;
+        private readonly Garage3_0Context db;
 
         public MembersController(Garage3_0Context context)
         {
-            _context = context;
+            db = context;
         }
 
         // GET: Members
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Members.ToListAsync());
+            return View(await db.Members.ToListAsync());
         }
 
         // GET: Members/Details/5
@@ -33,7 +33,7 @@ namespace Garage3._0.Controllers
                 return NotFound();
             }
 
-            var member = await _context.Members
+            var member = await db.Members
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (member == null)
             {
@@ -58,8 +58,8 @@ namespace Garage3._0.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(member);
-                await _context.SaveChangesAsync();
+                db.Add(member);
+                await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(member);
@@ -73,7 +73,7 @@ namespace Garage3._0.Controllers
                 return NotFound();
             }
 
-            var member = await _context.Members.FindAsync(id);
+            var member = await db.Members.FindAsync(id);
             if (member == null)
             {
                 return NotFound();
@@ -97,8 +97,8 @@ namespace Garage3._0.Controllers
             {
                 try
                 {
-                    _context.Update(member);
-                    await _context.SaveChangesAsync();
+                    db.Update(member);
+                    await db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,7 +124,7 @@ namespace Garage3._0.Controllers
                 return NotFound();
             }
 
-            var member = await _context.Members
+            var member = await db.Members
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (member == null)
             {
@@ -139,15 +139,15 @@ namespace Garage3._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var member = await _context.Members.FindAsync(id);
-            _context.Members.Remove(member);
-            await _context.SaveChangesAsync();
+            var member = await db.Members.FindAsync(id);
+            db.Members.Remove(member);
+            await db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MemberExists(int id)
         {
-            return _context.Members.Any(e => e.Id == id);
+            return db.Members.Any(e => e.Id == id);
         }
     }
 }
