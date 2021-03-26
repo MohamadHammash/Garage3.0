@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Garage3._0.Data
@@ -38,6 +39,7 @@ namespace Garage3._0.Data
         }
         private static List<Member> GetMembers()
         {
+            var getPersonNummer = new CustomBuilders();
             var members = new List<Member>();
             for (int i = 0; i < 76; i++)
             {
@@ -47,7 +49,7 @@ namespace Garage3._0.Data
                 {
                     FirstName = fake.Name.FirstName(),
                     LastName = fake.Name.LastName(),
-                    Personnummer = fake.Person.Personnummer(),
+                    Personnummer = getPersonNummer.GetPersonnummer(),
                     MbShipRegDate = regDate,
                     ProEndDate = endDate
                 };
@@ -61,12 +63,13 @@ namespace Garage3._0.Data
             var vehicles = new List<Vehicle>();
             for (int i = 0; i < 60; i++)
             {
+                    var getRegNr = new CustomBuilders();
                 var vehicle = new Vehicle
                 {
                     Model = fake.Vehicle.Model(),
                     Brand = fake.Vehicle.Manufacturer(),
                     Color = fake.Lorem.Word(),
-                    RegNr = fake.Vehicle.Vin(),
+                    RegNr =  getRegNr.GetRegNr(),
                     NumberOfWheels = fake.Random.Int(1, 10),
                     ArrivalTime = fake.Date.Recent(),
                     VehicleType = new VehicleType
@@ -78,5 +81,7 @@ namespace Garage3._0.Data
             }
             return vehicles;
         }
+
+
     }
 }

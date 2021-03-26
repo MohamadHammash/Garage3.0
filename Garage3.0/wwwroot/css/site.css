@@ -66,7 +66,7 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    background-image: url("../Assets/Santa-Monica-Civic-Center-Parking-Garage-1.jpg");
+    background-image: url("../Assest/1736.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -119,4 +119,9 @@ body {
     .search-sec {
         background: rgba(26, 70, 104, 0.3);
     }
+}
+.myTable{
+    background-color: ghostwhite;
+    opacity :50%;
+    
 }
