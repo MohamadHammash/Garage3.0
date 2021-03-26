@@ -1,59 +1,58 @@
-﻿@model IEnumerable<Garage3._0.Models.Entities.Member>
+﻿@model IEnumerable<MembersListViewModel>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Members List</h1>
 
 <p>
     <a asp-action="Add">Add New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Personnummer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MbShipRegDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProEndDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="container">
+
+    <ul class="list-group list-group-horizontal bg-transparent justify-content-start ">
+        <li class="list-group-item bg-transparent border-0 text-light h3">@Html.DisplayNameFor(model => model.FullName)</li>
+        <li class="list-group-item bg-transparent border-0 text-light h3"> @Html.DisplayNameFor(model => model.Personnummer)</li>
+    </ul>
+</div>
+
+
+
+
+
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Personnummer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MbShipRegDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProEndDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Remove" asp-route-id="@item.Id">Remove</a>
-            </td>
-        </tr>
+
+<div class="container">
+    
+
+    <ul class="list-group list-group-horizontal bg-transparent justify-content-start ">
+        
+        <li class="list-group-item bg-transparent border-0 text-light">@Html.DisplayFor(modelItem => item.FullName)</li>
+        <li class="list-group-item bg-transparent border-0 text-light"> @Html.DisplayFor(modelItem => item.Personnummer)</li>
+        <li class="list-group-item bg-transparent border-0 text-light offset-3">
+            <div class="container">
+
+                <ul class="list-group list-group-horizontal bg-transparent justify-content-between ">
+                    <li class="list-group-item bg-transparent border-0 text-light "><a asp-action="Edit" asp-route-id="@item.Id">Edit</a></li>
+                    <li class="list-group-item bg-transparent border-0 text-light "><a asp-action="Details" asp-route-id="@item.Id">Details</a></li>
+                    <li class="list-group-item bg-transparent border-0 text-light "><a asp-action="Remove" asp-route-id="@item.Id">Remove</a></li>
+                </ul>
+            </div>
+
+        </li>
+
+    </ul>
+</div>
+
+@*<div class="container">
+
+    <ul class="list-group list-group-horizontal bg-transparent justify-content-end ">
+        <li class="list-group-item bg-transparent border-0 text-light "><a asp-action="Edit" asp-route-id="@item.Id">Edit</a></li>
+        <li class="list-group-item bg-transparent border-0 text-light "><a asp-action="Details" asp-route-id="@item.Id">Details</a></li>
+        <li class="list-group-item bg-transparent border-0 text-light "><a asp-action="Remove" asp-route-id="@item.Id">Remove</a></li>
+    </ul>
+</div>*@
+
 }
-    </tbody>
-</table>
+

@@ -29,6 +29,7 @@ namespace Garage3._0
 
             services.AddDbContext<Garage3_0Context>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("Garage3_0Context")));
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

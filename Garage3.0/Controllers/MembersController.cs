@@ -7,22 +7,33 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Garage3._0.Data;
 using Garage3._0.Models.Entities;
+using AutoMapper;
+using Bogus;
+using Garage3._0.Models.ViewModels.MembersViewModels;
 
 namespace Garage3._0.Controllers
 {
     public class MembersController : Controller
     {
         private readonly Garage3_0Context db;
+        private readonly IMapper mapper;
+        private Faker faker;
 
-        public MembersController(Garage3_0Context context)
+        public MembersController(Garage3_0Context context, IMapper mapper)
         {
             db = context;
+            this.mapper = mapper;
+            faker = new Faker("sv");
         }
 
         // GET: Members
         public async Task<IActionResult> Index()
         {
-            return View(await db.Members.ToListAsync());
+
+            var model = mapper.ProjectTo<MembersListViewModel>(db.Members).Take(15);
+            return View(await model.ToListAsync());
+
+            //return View(await db.Members.ToListAsync());
         }
 
         // GET: Members/Details/5
@@ -33,8 +44,11 @@ namespace Garage3._0.Controllers
                 return NotFound();
             }
 
-            var member = await db.Members
+            var member = await mapper
+                .ProjectTo<MembersDetailsViewModel>(db.Members)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+           
             if (member == null)
             {
                 return NotFound();

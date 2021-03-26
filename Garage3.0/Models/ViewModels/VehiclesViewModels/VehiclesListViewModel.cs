@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Garage3._0.Models.ViewModels.VehiclesViewModels
 {
-    public class ParkedVehiclesViewModel
+    public class VehiclesListViewModel
     {
         [Display(Name = "Registration Number")]
         public string RegNr { get; set; }

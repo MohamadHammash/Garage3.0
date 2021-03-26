@@ -15,6 +15,8 @@ namespace Garage3._0.Models.ViewModels.MembersViewModels
         public string Personnummer { get; set; }
         public DateTime MbShipRegDate { get; set; }
         public DateTime ProEndDate { get; set; }
+        [Display(Name = "Vehicles Owned")]
+        public int VehiclesOwned { get; set; }
         public ICollection<Vehicle> Vehicles { get; set; }
     }
 }

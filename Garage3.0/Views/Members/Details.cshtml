@@ -1,4 +1,4 @@
-﻿@model Garage3._0.Models.Entities.Member
+﻿@model MembersDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -10,35 +10,50 @@
     <h4>Member</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FirstName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.LastName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.LastName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Personnummer)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Personnummer)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.MbShipRegDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.MbShipRegDate)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ProEndDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ProEndDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.VehiclesOwned)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.VehiclesOwned)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vehicles)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var vehicle in Model.Vehicles)
+            {
+                <a asp-controller="Vehicles" asp-action="Details" asp-route-id="@vehicle.Id">@vehicle.RegNr </a><br />
+            }
         </dd>
     </dl>
 </div>

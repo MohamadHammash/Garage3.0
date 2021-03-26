@@ -18,39 +18,52 @@ namespace Garage3._0.Data
             using (var db = services.GetRequiredService<Garage3_0Context>())
             {
                 fake = new Faker("sv");
-             
+
 
                 if (db.Members.Any())
                 {
                     return;
                 }
-                List<Member> members = GetMembers();
-                await db.AddRangeAsync(members);
+                List<Member> members = new List<Member>();
+                var vehicles = GetVehicles();
 
-                var vehicles = new List<Vehicle>();
-
-                for (int i = 0; i < 100; i++)
+                for (int i = 0; i < vehicles.Count(); i++)
                 {
-                    var vehicle = new Vehicle
+                    var member = new Member
                     {
-                        Model = fake.Vehicle.Model(),
-                        Color = fake.Vehicle.Manufacturer(),
-                        VehicleType = new VehicleType(),
-                        RegNr = fake.Vehicle.Vin(),
-                        NumberOfwheeels = 4
-
+                        FirstName = fake.Name.FirstName(),
+                        LastName = fake.Name.LastName(),
+                        Personnummer = fake.Person.Personnummer(),
+                        MbShipRegDate = fake.Date.Recent(),
+                        ProEndDate = fake.Date.Soon()
 
                     };
-
-                    vehicles.Add(vehicle);
+                    members.Add(member);
                 }
+                await db.AddRangeAsync(members);
 
+
+                foreach (var vehicle in vehicles)
+                {
+
+                    foreach (var member in members)
+                    {
+                        vehicle.Member = member;
+                    }
+
+                }
                 await db.AddRangeAsync(vehicles);
                 await db.SaveChangesAsync();
 
             }
 
         }
+
+
+
+
+
+
 
         private static List<Member> GetMembers()
         {
@@ -67,6 +80,7 @@ namespace Garage3._0.Data
                     LastName = lName,
                     Personnummer = fake.Person.Personnummer(),
                     MbShipRegDate = fake.Date.Recent(),
+                    ProEndDate = fake.Date.Soon()
 
                 };
 
@@ -75,7 +89,55 @@ namespace Garage3._0.Data
 
             return members;
         }
-        
+        private static List<Vehicle> GetVehicles()
+        {
+            var vehicles = new List<Vehicle>();
+            for (int i = 0; i < 100; i++)
+            {
+                var vehicle = new Vehicle
+                {
+                    Model = fake.Vehicle.Model(),
+                    Brand = fake.Vehicle.Manufacturer(),
+                    Color = fake.Lorem.Word(),
+                    RegNr = fake.Vehicle.Vin(),
+                    NumberOfwheeels = fake.Random.Int(1, 10),
+                    ArrivalTime = fake.Date.Recent(),
+                    VehicleType = new VehicleType
+                    {
+                        TypeName = fake.Vehicle.Type()
+                    },
+                };
+                vehicles.Add(vehicle);
+            }
+            return vehicles;
+        }
+
 
     }
 }
+//for (int i = 0; i < 100; i++)
+//{
+//    var vehicle = new Vehicle
+//    {
+
+
+
+
+//        Model = fake.Vehicle.Model(),
+//        Color = fake.Vehicle.Manufacturer(),
+//        VehicleType = new VehicleType()
+//        {
+//            TypeName = fake.Vehicle.Type()
+
+//        },
+//        RegNr = fake.Vehicle.Vin(),
+//        NumberOfwheeels = 4,
+//        ArrivalTime = fake.Date.Recent(),
+//        Brand = fake.Vehicle.Model()
+
+
+
+//    };
+
+//    vehicles.Add(vehicle);
+//}
