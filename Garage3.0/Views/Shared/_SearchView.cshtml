@@ -1,4 +1,4 @@
-﻿@model  VehicleType
+﻿@model  VehiclesListViewModel
 
 
     <section class="search-sec mt-5">
@@ -16,13 +16,15 @@
                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                 <select class="form-control search-slt" id="exampleFormControlSelect1">
                                     <option>Select Vehicle</option>
-                                    @foreach (var type in Model.TypeName)
-                                    {
-                                        <option>@type</option>
-                                    }
-                                   
-                                    @*<option>Option</option>
-                                    <option>Option</option>*@
+                                    @*@foreach (var type in Model.TypeName)
+        {
+            <option>@type</option>
+        }*@
+
+                                    <option>Car</option>
+                                    <option>Motorcycle</option>
+                                    <option>Bus</option>
+                                    <option>Boat</option>
                                 </select>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">

@@ -7,25 +7,41 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Garage3._0.Data;
 using Garage3._0.Models.Entities;
+using Garage3._0.Models.ViewModels.VehiclesViewModels;
+using AutoMapper;
 
 namespace Garage3._0.Controllers
 {
     public class VehiclesController : Controller
     {
         private readonly Garage3_0Context db;
-
-        public VehiclesController(Garage3_0Context context)
+       
+       
+        public VehiclesController(Garage3_0Context context, IMapper mapper)
         {
             db = context;
+           
         }
 
-        // GET: Vehicles
-        public async Task<IActionResult> Index()
+        
+        //GET: Vehicles
+        public async Task<IActionResult> Index(int page = 0)
         {
             var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
-            return View(await vehicles.ToListAsync());
+            const int PageSize = 3; // you can always do something more elegant to set this
+
+            var count = vehicles.Count();
+
+            var data = vehicles.Skip((int)(page * PageSize)).Take(PageSize).ToList();
+
+            this.ViewBag.MaxPage = (count / PageSize) - (count % PageSize == 0 ? 1 : 0);
+
+            this.ViewBag.Page = page;
+
+            return View(data);
         }
 
+      
         // GET: Vehicles/Details/5
         public async Task<IActionResult> Details(int? id)
         {

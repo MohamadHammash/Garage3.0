@@ -11,7 +11,7 @@
 </p>
 <div class="container">
 
-    <ul class="list-group list-group-horizontal bg-transparent justify-content-start ">
+    <ul class="list-group list-group-horizontal bg-dark justify-content-start ">
         <li class="list-group-item bg-transparent border-0 text-light h3">@Html.DisplayNameFor(model => model.FullName)</li>
         <li class="list-group-item bg-transparent border-0 text-light h3"> @Html.DisplayNameFor(model => model.Personnummer)</li>
     </ul>
@@ -28,15 +28,15 @@
 
     <ul class="list-group list-group-horizontal bg-transparent justify-content-start ">
         
-        <li class="list-group-item bg-transparent border-0 text-light">@Html.DisplayFor(modelItem => item.FullName)</li>
-        <li class="list-group-item bg-transparent border-0 text-light"> @Html.DisplayFor(modelItem => item.Personnummer)</li>
-        <li class="list-group-item bg-transparent border-0 text-light offset-3">
+        <li class="list-group-item bg-transparent border-0 text-dark">@Html.DisplayFor(modelItem => item.FullName)</li>
+        <li class="list-group-item bg-transparent border-0 text-dark"> @Html.DisplayFor(modelItem => item.Personnummer)</li>
+        <li class="list-group-item bg-transparent border-0 text-dark offset-3">
             <div class="container">
 
                 <ul class="list-group list-group-horizontal bg-transparent justify-content-between ">
-                    <li class="list-group-item bg-transparent border-0 text-light "><a asp-action="Edit" asp-route-id="@item.Id">Edit</a></li>
-                    <li class="list-group-item bg-transparent border-0 text-light "><a asp-action="Details" asp-route-id="@item.Id">Details</a></li>
-                    <li class="list-group-item bg-transparent border-0 text-light "><a asp-action="Remove" asp-route-id="@item.Id">Remove</a></li>
+                    <li class="list-group-item bg-transparent border-0  text-dark "><a asp-action="Edit" asp-route-id="@item.Id">Edit</a></li>
+                    <li class="list-group-item bg-transparent border-0  text-dark "><a asp-action="Details" asp-route-id="@item.Id">Details</a></li>
+                    <li class="list-group-item bg-transparent border-0  text-dark "><a asp-action="Remove" asp-route-id="@item.Id">Remove</a></li>
                 </ul>
             </div>
 

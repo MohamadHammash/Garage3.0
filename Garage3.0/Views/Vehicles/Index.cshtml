@@ -1,17 +1,23 @@
 ﻿@model IEnumerable<Vehicle>
 
+
 @{
     ViewData["Title"] = "Index";
 }
 
 
-@*<partial name="_SearchView" model="@V" />*@
+@*@{
+    <partial name="_SearchView" />
+        }*@
+
+
 <h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table text-light">
+
+<table class="table table-hover table-dark">
     <thead>
         <tr>
             <th>
@@ -42,38 +48,55 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Brand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Color)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegNr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfWheels)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArrivalTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Member.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehicleType.TypeName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegNr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfWheels)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArrivalTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Member.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleType.TypeName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<br />
+@if (ViewBag.Page > 0)
+{
+<a href="@Url.Action("Index", new { page = ViewBag.Page - 1 })"
+   class="btn btn-outline-info">
+    &laquo; Prev
+</a>
+}
+@if (ViewBag.Page < ViewBag.MaxPage)
+{
+    <a href="@Url.Action("Index", new { page = ViewBag.Page + 1 })"
+       class="btn btn-outline-info">
+        Next &raquo;
+    </a>
+}
+
