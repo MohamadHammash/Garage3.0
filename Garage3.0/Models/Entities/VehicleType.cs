@@ -17,9 +17,7 @@ namespace Garage3._0.Models.Entities
 
         public string Car { get; private set; }
         public string Bus { get; private set; }
-
         public string Motorcycle { get; private set; }
-
         public string Boat { get; private set; }
 
         // nav prop 

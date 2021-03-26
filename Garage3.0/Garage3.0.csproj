@@ -8,6 +8,7 @@
   <ItemGroup>
     <Folder Include="Models\ViewModels\VehicleTypesViewModels\" />
     <Folder Include="Models\ViewModels\VehiclesViewModels\" />
+    <Folder Include="wwwroot\Assets\" />
   </ItemGroup>
 
   <ItemGroup>
