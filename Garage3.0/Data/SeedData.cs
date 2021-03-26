@@ -67,7 +67,7 @@ namespace Garage3._0.Data
                     Brand = fake.Vehicle.Manufacturer(),
                     Color = fake.Lorem.Word(),
                     RegNr = fake.Vehicle.Vin(),
-                    NumberOfwheeels = fake.Random.Int(1, 10),
+                    NumberOfWheels = fake.Random.Int(1, 10),
                     ArrivalTime = fake.Date.Recent(),
                     VehicleType = new VehicleType
                     {

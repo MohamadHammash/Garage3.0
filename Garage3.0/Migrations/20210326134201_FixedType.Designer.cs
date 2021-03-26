@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Garage3._0.Migrations
 {
     [DbContext(typeof(Garage3_0Context))]
-    [Migration("20210325150620_added-bogus")]
-    partial class addedbogus
+    [Migration("20210326134201_FixedType")]
+    partial class FixedType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,6 +60,9 @@ namespace Garage3._0.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Number")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("ParkingSpots");
@@ -87,10 +90,11 @@ namespace Garage3._0.Migrations
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NumberOfwheeels")
+                    b.Property<int>("NumberOfWheels")
                         .HasColumnType("int");
 
                     b.Property<string>("RegNr")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("VehicleTypeId")
@@ -117,9 +121,6 @@ namespace Garage3._0.Migrations
 
                     b.Property<string>("TypeName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("VehicleId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

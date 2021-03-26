@@ -1,9 +1,11 @@
-﻿@model IEnumerable<Garage3._0.Models.Entities.Vehicle>
+﻿@model IEnumerable<Vehicle>
 
 @{
     ViewData["Title"] = "Index";
 }
 
+
+@*<partial name="_SearchView" model="@V" />*@
 <h1>Index</h1>
 
 <p>
@@ -55,7 +57,7 @@
                 @Html.DisplayFor(modelItem => item.RegNr)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NumberOfwheeels)
+                @Html.DisplayFor(modelItem => item.NumberOfWheels)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ArrivalTime)

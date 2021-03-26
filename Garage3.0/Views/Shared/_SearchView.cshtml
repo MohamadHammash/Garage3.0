@@ -1,5 +1,39 @@
-﻿@model  Garage3._0.Models.Entities.VehicleType
+﻿@model  VehicleType
 
+
+    <section class="search-sec mt-5">
+        <div class="container">
+            <form action="#" method="post" novalidate="novalidate">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <input type="text" class="form-control search-slt" placeholder="Enter First Name">
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <input type="text" class="form-control search-slt" placeholder="Enter Drop City">
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <select class="form-control search-slt" id="exampleFormControlSelect1">
+                                    <option>Select Vehicle</option>
+                                    @foreach (var type in Model.TypeName)
+                                    {
+                                        <option>@type</option>
+                                    }
+                                   
+                                    @*<option>Option</option>
+                                    <option>Option</option>*@
+                                </select>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <button type="button" class="btn btn-danger wrn-btn">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
 
         <!--<div class="container">-->
         @*<div class="row pt-1 pb-1">
@@ -33,35 +67,3 @@
             </a>
         </div>
     </section>-->
-    <section class="search-sec mt-5">
-        <div class="container">
-            <form action="#" method="post" novalidate="novalidate">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                <input type="text" class="form-control search-slt" placeholder="Enter First Name">
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                <input type="text" class="form-control search-slt" placeholder="Enter Drop City">
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                <select class="form-control search-slt" id="exampleFormControlSelect1">
-                                    <option>Select Vehicle</option>
-                                    <option> @Model.Car</option>
-                                    <option>@Model.Boat</option>
-                                    <option>@Model.Motorcycle</option>
-                                    <option>@Model.Bus</option>
-                                    <option>Option</option>
-                                    <option>Option</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                <button type="button" class="btn btn-danger wrn-btn">Search</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </section>

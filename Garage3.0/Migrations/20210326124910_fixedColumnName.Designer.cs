@@ -4,14 +4,16 @@ using Garage3._0.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Garage3._0.Migrations
 {
     [DbContext(typeof(Garage3_0Context))]
-    partial class Garage3_0ContextModelSnapshot : ModelSnapshot
+    [Migration("20210326124910_fixedColumnName")]
+    partial class fixedColumnName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,11 +116,26 @@ namespace Garage3._0.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Boat")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Bus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Car")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Motorcycle")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("NumberOfSpots")
                         .HasColumnType("int");
 
                     b.Property<string>("TypeName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VehicleId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
