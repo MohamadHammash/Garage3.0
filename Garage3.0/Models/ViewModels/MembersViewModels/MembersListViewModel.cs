@@ -11,6 +11,5 @@ namespace Garage3._0.Models.ViewModels.MembersViewModels
         public string FullName { get; set; }
         public string Personnummer { get; set; }
 
-
     }
 }

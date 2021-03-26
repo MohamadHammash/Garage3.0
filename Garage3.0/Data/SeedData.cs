@@ -24,33 +24,15 @@ namespace Garage3._0.Data
                 {
                     return;
                 }
-                List<Member> members = new List<Member>();
                 var vehicles = GetVehicles();
+                var members = GetMembers();
 
-                for (int i = 0; i < vehicles.Count(); i++)
-                {
-                    var member = new Member
-                    {
-                        FirstName = fake.Name.FirstName(),
-                        LastName = fake.Name.LastName(),
-                        Personnummer = fake.Person.Personnummer(),
-                        MbShipRegDate = fake.Date.Recent(),
-                        ProEndDate = fake.Date.Soon()
-
-                    };
-                    members.Add(member);
-                }
                 await db.AddRangeAsync(members);
-
 
                 foreach (var vehicle in vehicles)
                 {
-
-                    foreach (var member in members)
-                    {
-                        vehicle.Member = member;
-                    }
-
+                    var r = fake.Random.Int(1, 49);
+                    vehicle.Member = members[r];
                 }
                 await db.AddRangeAsync(vehicles);
                 await db.SaveChangesAsync();
@@ -59,40 +41,61 @@ namespace Garage3._0.Data
 
         }
 
-
-
-
-
-
-
         private static List<Member> GetMembers()
         {
             var members = new List<Member>();
-
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 50; i++)
             {
-                var fName = fake.Name.FirstName();
-                var lName = fake.Name.LastName();
-
+                var regDate = fake.Date.Recent();
+                var endDate = regDate.AddMonths(1);
                 var member = new Member
                 {
-                    FirstName = fName,
-                    LastName = lName,
+                    FirstName = fake.Name.FirstName(),
+                    LastName = fake.Name.LastName(),
                     Personnummer = fake.Person.Personnummer(),
-                    MbShipRegDate = fake.Date.Recent(),
-                    ProEndDate = fake.Date.Soon()
-
+                    MbShipRegDate = regDate,
+                    ProEndDate = endDate
                 };
-
                 members.Add(member);
             }
 
             return members;
         }
+
+
+
+
+
+
+
+        //private static List<Member> GetMembers()
+        //{
+        //    var members = new List<Member>();
+
+        //    for (int i = 0; i < 200; i++)
+        //    {
+        //        var fName = fake.Name.FirstName();
+        //        var lName = fake.Name.LastName();
+
+        //        var member = new Member
+        //        {
+        //            FirstName = fName,
+        //            LastName = lName,
+        //            Personnummer = fake.Person.Personnummer(),
+        //            MbShipRegDate = fake.Date.Recent(),
+        //            ProEndDate = fake.Date.Soon()
+
+        //        };
+
+        //        members.Add(member);
+        //    }
+
+        //    return members;
+        //}
         private static List<Vehicle> GetVehicles()
         {
             var vehicles = new List<Vehicle>();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 30; i++)
             {
                 var vehicle = new Vehicle
                 {

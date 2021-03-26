@@ -68,15 +68,22 @@ namespace Garage3._0.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add( Member member)
+        public async Task<IActionResult> Add( MembersAddViewModel viewmodel)
         {
             if (ModelState.IsValid)
             {
-                db.Add(member);
+
+                var member = mapper.Map<Member>(viewmodel);
+                member.MbShipRegDate = DateTime.Today;
+                member.ProEndDate = DateTime.Today.AddMonths(1);
+
+
+
+                    db.Add(member);
                 await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(member);
+            return View(viewmodel);
         }
 
         // GET: Members/Edit/5
