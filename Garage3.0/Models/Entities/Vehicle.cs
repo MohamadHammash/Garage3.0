@@ -21,7 +21,7 @@ namespace Garage3._0.Models.Entities
         public string RegNr { get; set; }
         [Display(Name = "Number of wheels")]
 
-        public int NumberOfwheeels { get; set; }
+        public int NumberOfWheels { get; set; }
 
         [Display(Name = "Arrival Time")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MMMM-dd HH:mm}")]

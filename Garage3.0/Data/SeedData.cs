@@ -37,7 +37,7 @@ namespace Garage3._0.Data
                         Color = fake.Vehicle.Manufacturer(),
                         VehicleType = new VehicleType(),
                         RegNr = fake.Vehicle.Vin(),
-                        NumberOfwheeels = 4
+                        NumberOfwheels = 4
 
 
                     };

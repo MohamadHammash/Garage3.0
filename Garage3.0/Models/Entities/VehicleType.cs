@@ -15,6 +15,13 @@ namespace Garage3._0.Models.Entities
         public int NumberOfSpots { get; set; }
         public int VehicleId { get; set; }
 
+        public string Car { get; private set; }
+        public string Bus { get; private set; }
+
+        public string Motorcycle { get; private set; }
+
+        public string Boat { get; private set; }
+
         // nav prop 
 
         public ICollection<Vehicle> Vehicles { get; set; }
