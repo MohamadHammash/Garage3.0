@@ -1,4 +1,14 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿let audio = document.querySelector('#audioPVM')
 
-// Write your JavaScript code.
+window.onload = load();
+   
+
+function load() {
+    audio.play();
+}
+
+
+//audio.setAttribute('src', '~/Assest/carstartgarage.mp3')
+//audio.setAttribute('id', 'audioPVM');
+//audio.setAttribute('controls', 'controls');
+//document.body.appendChild(audio);
