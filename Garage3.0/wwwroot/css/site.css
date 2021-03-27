@@ -9,11 +9,11 @@ a.navbar-brand {
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #ff0000;
+  color: darkviolet;
 }
 
 a:hover {
-    color: orangered;
+    color: orange;
 }
 
 .btn-primary {
@@ -124,4 +124,9 @@ body {
     background-color: ghostwhite;
     opacity :50%;
     
+}
+
+#table {
+    background: RGBA(135,111,219,0.8);
+    color: yellow;
 }

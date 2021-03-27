@@ -1,64 +1,99 @@
 ﻿@model IEnumerable<MembersListViewModel>
 
+@{ ViewData["Title"] = "Index"; }
+
+<h1 class="text-center text-warning">Members List</h1>
+
 @{
-    ViewData["Title"] = "Index";
+    <partial name="_SearchView" />
 }
-
-<h1>Members List</h1>
-
 <p>
-    <a asp-action="Add">Add New</a>
+    <a asp-action="Add" class="btn btn-warning">Add New</a>
 </p>
-<div class="container">
+@*<div class="container">
 
-    <ul class="list-group list-group-horizontal bg-dark justify-content-start ">
-        <li class="list-group-item bg-transparent border-0 text-light h3">@Html.DisplayNameFor(model => model.FullName)</li>
-        <li class="list-group-item bg-transparent border-0 text-light h3"> @Html.DisplayNameFor(model => model.Personnummer)</li>
-    </ul>
-</div>
-
-
-
-@*https://via.placeholder.com/150*@
-
-
-
-
-
-
-@foreach (var item in Model)
-{
-
-    <div class="container">
-
-
-    <ul class="list-group list-group-horizontal bg-transparent justify-content-start ">
-        
-        <li class="list-group-item bg-transparent border-0 text-dark">@Html.DisplayFor(modelItem => item.FullName)</li>
-        <li class="list-group-item bg-transparent border-0 text-dark"> @Html.DisplayFor(modelItem => item.Personnummer)</li>
-        <li class="list-group-item bg-transparent border-0 text-dark offset-3">
-            <div class="container">
-
-                <ul class="list-group list-group-horizontal bg-transparent justify-content-between ">
-                    <li class="list-group-item bg-transparent border-0  text-dark "><a asp-action="Edit" asp-route-id="@item.Id">Edit</a></li>
-                    <li class="list-group-item bg-transparent border-0  text-dark "><a asp-action="Details" asp-route-id="@item.Id">Details</a></li>
-                    <li class="list-group-item bg-transparent border-0  text-dark "><a asp-action="Remove" asp-route-id="@item.Id">Remove</a></li>
-                </ul>
-            </div>
-
-            </li>
-
+        <ul class="list-group list-group-horizontal bg-dark justify-content-start ">
+            <li class="list-group-item bg-transparent border-0 text-light h3">@Html.DisplayNameFor(model => model.FullName)</li>
+            <li class="list-group-item bg-transparent border-0 text-light h3"> @Html.DisplayNameFor(model => model.Personnummer)</li>
         </ul>
-    </div>
+    </div>*@
 
-    @*<div class="container">
+<table class="table table-hover table-dark" id="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Personnummer)
+            </th>
+            <th>
 
-            <ul class="list-group list-group-horizontal bg-transparent justify-content-end ">
-                <li class="list-group-item bg-transparent border-0 text-light "><a asp-action="Edit" asp-route-id="@item.Id">Edit</a></li>
-                <li class="list-group-item bg-transparent border-0 text-light "><a asp-action="Details" asp-route-id="@item.Id">Details</a></li>
-                <li class="list-group-item bg-transparent border-0 text-light "><a asp-action="Remove" asp-route-id="@item.Id">Remove</a></li>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.FullName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Personnummer)
+    </td>
+    <td>
+        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    </td>
+</tr>}
+    </tbody>
+</table>
+
+@if (ViewBag.Page > 0)
+{
+<a href="@Url.Action("Index", new { page = ViewBag.Page - 1 })"
+   class="btn btn-warning mr-1">
+    &laquo; Prev
+</a>}
+@if (ViewBag.Page < ViewBag.MaxPage)
+{
+<a href="@Url.Action("Index", new { page = ViewBag.Page + 1 })"
+   class="btn btn-warning">
+    Next &raquo;
+</a> } @*https://via.placeholder.com/150*@ @*@foreach (var item in Model)
+    {
+
+        <div class="container">
+
+
+        <ul class="list-group list-group-horizontal bg-transparent justify-content-start ">
+
+            <li class="list-group-item bg-transparent border-0 text-dark">@Html.DisplayFor(modelItem => item.FullName)</li>
+            <li class="list-group-item bg-transparent border-0 text-dark"> @Html.DisplayFor(modelItem => item.Personnummer)</li>
+            <li class="list-group-item bg-transparent border-0 text-dark offset-3">
+                <div class="container">
+
+                    <ul class="list-group list-group-horizontal bg-transparent justify-content-between ">
+                        <li class="list-group-item bg-transparent border-0  text-dark "><a asp-action="Edit" asp-route-id="@item.Id">Edit</a></li>
+                        <li class="list-group-item bg-transparent border-0  text-dark "><a asp-action="Details" asp-route-id="@item.Id">Details</a></li>
+                        <li class="list-group-item bg-transparent border-0  text-dark "><a asp-action="Remove" asp-route-id="@item.Id">Remove</a></li>
+                    </ul>
+                </div>
+
+                </li>
+
             </ul>
-        </div>*@
+        </div>*@ @*<div class="container">
 
-}
+        <ul class="list-group list-group-horizontal bg-transparent justify-content-end ">
+            <li class="list-group-item bg-transparent border-0 text-light "><a asp-action="Edit" asp-route-id="@item.Id">Edit</a></li>
+            <li class="list-group-item bg-transparent border-0 text-light "><a asp-action="Details" asp-route-id="@item.Id">Details</a></li>
+            <li class="list-group-item bg-transparent border-0 text-light "><a asp-action="Remove" asp-route-id="@item.Id">Remove</a></li>
+        </ul>
+    </div>*@
+
+
 

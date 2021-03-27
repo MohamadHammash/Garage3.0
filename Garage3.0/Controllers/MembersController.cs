@@ -27,11 +27,22 @@ namespace Garage3._0.Controllers
         }
 
         // GET: Members
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 0)
         {
+            var model = mapper.ProjectTo<MembersListViewModel>(db.Members).Take(150);
+           
+            const int PageSize = 20; // you can always do something more elegant to set this
 
-            var model = mapper.ProjectTo<MembersListViewModel>(db.Members).Take(15);
-            return View(await model.ToListAsync());
+            var count = model.Count();
+
+            var data = model.Skip((int)(page * PageSize)).Take(PageSize).ToList();
+
+            this.ViewBag.MaxPage = (count / PageSize) - (count % PageSize == 0 ? 1 : 0);
+
+            this.ViewBag.Page = page;
+
+
+            return View(data);
 
             //return View(await db.Members.ToListAsync());
         }
