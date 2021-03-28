@@ -18,7 +18,7 @@ namespace Garage3._0.Models.Entities
         [StringLength(30)]
         public string LastName { get; set; }
         [Required]
-        //[RegularExpression("([1-2][0|9])?[0-9]{2}([0][0-9]|[1][0-2])([0-2][0-9]|[3][0-1])[-]?[0-9]{4}", ErrorMessage = "Not a valid PN")]
+        [RegularExpression("([1-2][0|9])?[0-9]{2}([0][0-9]|[1][0-2])([0-2][0-9]|[3][0-1])[-]?[0-9]{4}", ErrorMessage = "Not a valid PN")]
         public string  Personnummer { get; set; }
         [Display(Name = "Registration Date")]
         public DateTime MbShipRegDate { get; set; }
