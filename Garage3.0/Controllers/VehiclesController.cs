@@ -80,6 +80,7 @@ namespace Garage3._0.Controllers
             {
                 var vehicle = mapper.Map<Vehicle>(viewModel);
                 vehicle.ArrivalTime = DateTime.Now;
+                
                 //vehicle.VehicleType.NumberOfSpots = faker.Random.Int(1, 3);
 
 
@@ -213,5 +214,6 @@ namespace Garage3._0.Controllers
                           })
                           .ToListAsync();
         }
+
     }
 }
