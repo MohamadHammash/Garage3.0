@@ -11,6 +11,7 @@ using AutoMapper;
 using Bogus;
 using Garage3._0.Models.ViewModels.MembersViewModels;
 
+
 namespace Garage3._0.Controllers
 {
     public class MembersController : Controller
@@ -110,6 +111,7 @@ namespace Garage3._0.Controllers
             {
                 return NotFound();
             }
+
             return View(member);
         }
 
@@ -144,6 +146,7 @@ namespace Garage3._0.Controllers
                         throw;
                     }
                 }
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(member);
