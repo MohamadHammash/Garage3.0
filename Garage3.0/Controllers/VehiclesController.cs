@@ -14,17 +14,54 @@ namespace Garage3._0.Controllers
     {
         private readonly Garage3_0Context db;
 
+
         public VehiclesController(Garage3_0Context context)
         {
             db = context;
         }
 
         // GET: Vehicles
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
+        //    return View(await vehicles.ToListAsync());
+        //}
+
+
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
-            return View(await vehicles.ToListAsync());
+            ViewData["VehicleTypeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "fordonType_desc" : "";
+            ViewData["RegisNrSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Regist_desc" : "";
+            ViewData["CurrentFilter"] = searchString;
+
+            var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType).AsQueryable();
+
+            //var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
+            //var vehicles = db.Vehicles;
+            
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                vehicles = vehicles.Where(v => v.RegNr.StartsWith(searchString));
+
+            }
+            switch (sortOrder)
+            {
+                case "fordonType_desc":
+                    vehicles = vehicles.OrderByDescending(v => v.VehicleType.TypeName);
+                    break;
+                case "Regist_desc":
+                    vehicles = vehicles.OrderByDescending(v => v.RegNr);
+                    break;
+                default:
+                    vehicles = vehicles.OrderBy(v => v.VehicleType.TypeName);
+                    break;
+            }
+
+
+            return View(await vehicles.AsNoTracking().ToListAsync());
         }
+
 
         // GET: Vehicles/Details/5
         public async Task<IActionResult> Details(int? id)
