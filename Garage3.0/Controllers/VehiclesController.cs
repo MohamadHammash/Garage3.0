@@ -170,8 +170,9 @@ namespace Garage3._0.Controllers
             {
                 return NotFound();
             }
-            ViewData["MemberId"] = new SelectList(db.Set<Member>(), "Id", "FirstName", vehicle.MemberId);
-            ViewData["VehicleTypeId"] = new SelectList(db.Set<VehicleType>(), "Id", "Id", vehicle.VehicleTypeId);
+            // not needed anymore, changed in the view
+            //ViewData["MemberId"] = new SelectList(db.Set<Member>(), "Id", "FirstName", vehicle.MemberId);
+            //ViewData["VehicleTypeId"] = new SelectList(db.Set<VehicleType>(), "Id", "Id", vehicle.VehicleTypeId);
             return View(vehicle);
         }
 
@@ -208,8 +209,9 @@ namespace Garage3._0.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MemberId"] = new SelectList(db.Set<Member>(), "Id", "FirstName", vehicle.MemberId);
-            ViewData["VehicleTypeId"] = new SelectList(db.Set<VehicleType>(), "Id", "Id", vehicle.VehicleTypeId);
+            // not needed anymore, changed in view
+            //ViewData["MemberId"] = new SelectList(db.Set<Member>(), "Id", "FirstName", vehicle.MemberId);
+            //ViewData["VehicleTypeId"] = new SelectList(db.Set<VehicleType>(), "Id", "Id", vehicle.VehicleTypeId);
             return View(vehicle);
         }
 
@@ -229,8 +231,8 @@ namespace Garage3._0.Controllers
             {
                 return NotFound();
             }
-
-            return View(vehicle);
+            var model = new LeavingVehiclesViewModel(vehicle);
+            return View(model);
         }
 
         // POST: Vehicles/Unpark/5

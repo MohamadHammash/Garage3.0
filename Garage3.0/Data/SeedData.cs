@@ -87,7 +87,7 @@ namespace Garage3._0.Data
             vehicleTypes.Add(new VehicleType { TypeName = "Car", NumberOfSpots = 1 });
             vehicleTypes.Add(new VehicleType { TypeName = "Truck", NumberOfSpots = 2 });
             vehicleTypes.Add(new VehicleType { TypeName = "Motorcycle", NumberOfSpots = 1 });
-            vehicleTypes.Add(new VehicleType { TypeName = "Buss", NumberOfSpots = 3 });
+            vehicleTypes.Add(new VehicleType { TypeName = "Bus", NumberOfSpots = 3 });
             return vehicleTypes;
         }
     }

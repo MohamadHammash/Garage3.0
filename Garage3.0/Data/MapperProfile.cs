@@ -16,7 +16,11 @@ namespace Garage3._0.Data
             CreateMap<Member, MembersListViewModel>()
                 .ForMember(
                 dest => dest.FullName,
-                from => from.MapFrom(m => m.FullName));
+                from => from.MapFrom(m => m.FullName))
+                .ForMember(
+                dest => dest.VehiclesOwned,
+                from => from.MapFrom(m => m.Vehicles.Count)
+                );
             CreateMap<Member, MembersAddViewModel>().ReverseMap();
 
             CreateMap<Member, MembersDetailsViewModel>()
