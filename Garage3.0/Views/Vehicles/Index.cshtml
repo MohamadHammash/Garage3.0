@@ -3,62 +3,57 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-
-@*<partial name="_SearchView" model="@V" />*@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Park"  >Create New</a>
+    <a asp-action="Park">Create New</a>
 </p>
-<table class="table text-light">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MemberFullName)
-            </th>
-            
-           
-            <th>
-                @Html.DisplayNameFor(model => model.RegNr)
-            </th>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.ArrivalTime)
-            </th>
-           
-            <th>
-                @Html.DisplayNameFor(model => model.VehicleType)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MemberFullName)
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.RegNr)
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.ArrivalTime)
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.VehicleType.TypeName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Unpark" asp-route-id="@item.Id">Leave</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container myTable">
+
+<div class="row">
+    <div class="col-md-2 col-3 col-sm-3 text-dark ">
+        @Html.DisplayNameFor(model => model.MemberFullName)
+    </div>
+    <div class="col-md-2 col-3 col-sm-3 text-dark ">
+        @Html.DisplayNameFor(model => model.RegNr)
+    </div>
+    <div class="col-md-2 col-3 col-sm-3 text-dark ">
+        @Html.DisplayNameFor(model => model.ArrivalTime)
+    </div>
+    <div class="col-md-2 col-3 col-sm-3 text-dark ">
+        @Html.DisplayNameFor(model => model.VehicleType)
+    </div>
+</div>
+</div>
+<div class="container myTable legend">
+    @foreach (var item in Model)
+    {
+
+    <div class="row">
+        <div class="col-md-2 col-3 col-sm-3">
+            @Html.DisplayFor(modelItem => item.MemberFullName)
+        </div>
+        <div class="col-md-2 col-3 col-sm-3 ">
+            @Html.DisplayFor(modelItem => item.RegNr)
+        </div>
+        <div class="col-md-2 col-3 col-sm-3 ">
+            @Html.DisplayFor(modelItem => item.ArrivalTime)
+        </div>
+        <div class="col-md-2 col-3 col-sm-3">
+            @Html.DisplayFor(modelItem => item.VehicleType.TypeName)
+        </div>
+        <div class="col-md-4 col-12 justify-content-center justify-content-md-between offset-sm-4 col-sm-4 offset-md-0">
+            <a asp-action="Edit" asp-route-id="@item.Id">Edit |</a>
+            <a asp-action="Details" asp-route-id="@item.Id">Details |</a>
+            <a asp-action="Unpark" asp-route-id="@item.Id">Leave</a>
+        </div>
+    </div>
+    }
+</div>
+
+
+
 <audio controls="controls" src="~/Assest/carstartgarage.mp3" id="audioPVM">
 </audio>
+
+@*ToDo: Fix the text size when x small*@

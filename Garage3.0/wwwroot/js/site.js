@@ -1,8 +1,8 @@
-﻿let audio = document.querySelector('#audioPVM')
+﻿////let audio = document.querySelector('#audioPVM')
 
-window.onload = load();
+////window.onload = load();
    
 
-function load() {
-    audio.play();
-}
+////function load() {
+////    audio.play();
+////}

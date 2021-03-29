@@ -18,6 +18,7 @@ namespace Garage3._0.Models.ViewModels.VehiclesViewModels
 
         [Display(Name = "Arrival Time")]
         public DateTime ArrivalTime { get; set; }
+        [Display(Name = "Owner")]
         public string MemberFullName { get; set; }
     }
 }

@@ -19,13 +19,12 @@ namespace Garage3._0.Services
         public async Task<IEnumerable<SelectListItem>> GetMemberAsync()
         {
             return await db.Members
-                          .Select(v => v.Id)
-                          .Distinct()
+                         
                           .Select(t => new SelectListItem
                           {
-                              Text = t.ToString(),
-                              Value = t.ToString()
-                          })
+                              Text = t.FullName.ToString(),
+                              Value = t.Id.ToString()
+                          }).Distinct()
                           .ToListAsync();
         }
     }

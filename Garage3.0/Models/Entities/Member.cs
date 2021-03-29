@@ -18,12 +18,13 @@ namespace Garage3._0.Models.Entities
         [StringLength(30)]
         public string LastName { get; set; }
         [Required]
-        [RegularExpression("([1-2][0|9])?[0-9]{2}([0][0-9]|[1][0-2])([0-2][0-9]|[3][0-1])[-]?[0-9]{4}", ErrorMessage = "Not a valid PN")]
+        [RegularExpression("([1-2][0|9])[0-9]{2}([0][0-9]|[1][0-2])([0-2][0-9]|[3][0-1])[-][0-9]{4}", ErrorMessage = "Only : YYYYMMDD-xxxx form is valid")]
         public string  Personnummer { get; set; }
         [Display(Name = "Registration Date")]
         public DateTime MbShipRegDate { get; set; }
         [Display(Name = "Pro valid until")]
         public DateTime ProEndDate { get; set; }
+        [Display(Name = "Name")]
         public string FullName => $"{FirstName} {LastName}";
 
 

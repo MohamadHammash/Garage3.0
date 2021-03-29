@@ -120,11 +120,23 @@ body {
         background: rgba(26, 70, 104, 0.3);
     }
 }
-.myTable{
-    background-color: ghostwhite;
-    opacity :50%;
-    
+.myTable {
+    background: rgba(256 256 256 / 30% );
+    font-weight: 700;
 }
 #audioPVM {
     display: none;
+}
+.legend .row:nth-of-type(odd) div {
+    background: rgba(248 248 255 / 50%);
+}
+.legend .row:nth-of-type(even) div {
+    /*background: #FFFFFF/90%;*/
+    background: rgba(248 248 240 / 50%);
+}
+.legend .row:nth-of-type(odd) div:hover {
+    background: rgba(0 0 0 /40%);
+}
+.legend .row:nth-of-type(even) div:hover{
+    background: rgb(92 147 129 /40%);
 }

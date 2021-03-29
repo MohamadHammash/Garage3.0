@@ -170,5 +170,14 @@ namespace Garage3._0.Controllers
         {
             return db.Members.Any(e => e.Id == id);
         }
+        public IActionResult PersNumExists(string personnummer, int id)
+        {
+            var garage = db.Members;
+            if (garage.Any(v => personnummer == v.Personnummer && id != v.Id))
+            {
+                return Json($"You are already a member");
+            }
+            return Json(true);
+        }
     }
 }

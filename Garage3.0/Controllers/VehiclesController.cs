@@ -67,7 +67,7 @@ namespace Garage3._0.Controllers
         // POST: Vehicles/Park
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Park")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Park(VehiclesParkViewModel viewModel)
         {
@@ -80,7 +80,7 @@ namespace Garage3._0.Controllers
             {
                 var vehicle = mapper.Map<Vehicle>(viewModel);
                 vehicle.ArrivalTime = DateTime.Now;
-                vehicle.VehicleType.NumberOfSpots = faker.Random.Int(1, 3);
+                //vehicle.VehicleType.NumberOfSpots = faker.Random.Int(1, 3);
 
 
                 ViewData["MemberId"] = new SelectList(db.Set<Member>(), "Id", "Id", vehicle.MemberId);
