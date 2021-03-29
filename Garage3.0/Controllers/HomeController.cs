@@ -23,7 +23,7 @@ namespace Garage3._0.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult AboutUs()
         {
             return View();
         }

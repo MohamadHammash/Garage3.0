@@ -11,6 +11,7 @@ using AutoMapper;
 using Bogus;
 using Garage3._0.Models.ViewModels.MembersViewModels;
 
+
 namespace Garage3._0.Controllers
 {
     public class MembersController : Controller
@@ -36,7 +37,7 @@ namespace Garage3._0.Controllers
         //    //return View(await db.Members.ToListAsync());
         //}
 
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, int page = 0, int pagesize = 20)
         {
 
             ViewData["FullNameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "fullName_desc" : "";
@@ -54,12 +55,11 @@ namespace Garage3._0.Controllers
                 //  members = members.Where(s => s.FirstName.ToUpper() StartsWith(searchString.Substring(0).ToUpper()+searchString.Substring(1).ToUpper()));
                 members = members.Where(s => s.FirstName.Contains(searchString));
             }
-
             switch (sortOrder)
             {
                 case "fullName_desc":
 
-                    members = members.OrderByDescending(m => m.FirstName.Substring(0,2));
+                    members = members.OrderByDescending(m => m.FirstName.Substring(0, 2));
                     break;
                 case "personNumber_desc":
                     members = members.OrderByDescending(s => s.Personnummer);
@@ -69,8 +69,36 @@ namespace Garage3._0.Controllers
                     break;
             }
             var model = mapper.ProjectTo<MembersListViewModel>(members);
-            return View(await model.AsNoTracking().Take(15).ToListAsync());
+            int PageSize = pagesize; // you can always do something more elegant to set this
+
+            var count = model.Count();
+
+            var data = model.Skip((int)(page * PageSize)).Take(PageSize);
+
+            this.ViewBag.MaxPage = (count / PageSize) - (count % PageSize == 0 ? 1 : 0);
+
+            this.ViewBag.Page = page;
+            return View(await data.ToListAsync());
         }
+
+        //public async Task<IActionResult> Index(int page = 0, int pagesize = 20)
+        //{
+        //    var model =  mapper.ProjectTo<MembersListViewModel>(db.Members).Take(150);
+           
+        //     int PageSize = pagesize; // you can always do something more elegant to set this
+
+        //    var count = model.Count();
+
+        //    var data = model.Skip((int)(page * PageSize)).Take(PageSize).ToList();
+
+        //    this.ViewBag.MaxPage = (count / PageSize) - (count % PageSize == 0 ? 1 : 0);
+
+        //    this.ViewBag.Page = page;
+
+
+        //    return View(data);
+            
+        //}
 
         // GET: Members/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -135,6 +163,7 @@ namespace Garage3._0.Controllers
             {
                 return NotFound();
             }
+
             return View(member);
         }
 
@@ -156,6 +185,7 @@ namespace Garage3._0.Controllers
                 {
                     db.Update(member);
                     await db.SaveChangesAsync();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -168,6 +198,7 @@ namespace Garage3._0.Controllers
                         throw;
                     }
                 }
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(member);

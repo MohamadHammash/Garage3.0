@@ -47,12 +47,12 @@ namespace Garage3._0.Controllers
             ViewData["RegisNrSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Regist_desc" : "";
             ViewData["CurrentFilter"] = searchString;
 
-                var vehicles = mapper.ProjectTo<VehiclesListViewModel>(db.Vehicles).Take(15);
-                //var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType).AsQueryable();
+            var vehicles = mapper.ProjectTo<VehiclesListViewModel>(db.Vehicles).Take(15);
+            //var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType).AsQueryable();
 
             //var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
             //var vehicles = db.Vehicles;
-            
+
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -75,6 +75,25 @@ namespace Garage3._0.Controllers
 
             return View(await vehicles.AsNoTracking().ToListAsync());
         }
+        
+        //GET: Vehicles
+        public async Task<IActionResult> Index(int page = 0, int pagesize = 20)
+        {
+            var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
+            int PageSize = pagesize; // you can always do something more elegant to set this
+
+            var count = vehicles.Count();
+
+            var data = vehicles.Skip((int)(page * PageSize)).Take(PageSize).ToList();
+
+            this.ViewBag.MaxPage = (count / PageSize) - (count % PageSize == 0 ? 1 : 0);
+
+            this.ViewBag.Page = page;
+
+            return View(data);
+        }
+            
+        
 
 
         // GET: Vehicles/Details/5

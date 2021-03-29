@@ -2,10 +2,18 @@
 @*@model IEnumerable<Garage3._0.Models.Entities.Vehicle>*@
 @model IEnumerable<VehiclesListViewModel>
 
+
 @{
     ViewData["Title"] = "Index";
 }
-<h1>Index</h1>
+
+
+@{
+    <partial name="_SearchView" />
+}
+
+
+<h1 class="text-warning text-center">Vehicles list</h1>
 
 <p>
     <a asp-action="Park">Create New</a>
@@ -139,4 +147,73 @@
             </tr>
         }
     </tbody>
-</table>*@
+</table>
+<br />
+
+
+<p class="text-warning"> Chose results per page:
+    <a href="@Url.Action("Index", new {page = ViewBag.Page , pagesize = 10 })" class="btn btn-warning">
+        10
+    </a>
+    <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 20   })" class="btn btn-warning">
+        20
+    </a>
+    <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 30 })" class="btn btn-warning">
+        30
+    </a>
+    <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 40  })" class="btn btn-warning">
+        40
+    </a>
+    <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 50 })" class="btn btn-warning">
+        50
+    </a>
+
+</p>
+   
+@*<select asp-for="">
+    <a href="@Url.Action("Index", new {page = ViewBag.Page , pagesize = 10 })" class="btn btn-warning">
+        <option value="10">
+
+            10
+
+        </option>
+    </a>
+    <option value="20">
+        <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 20   })" class="btn btn-warning">
+            20
+        </a>
+    </option>
+    <option value="30">
+        <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 30 })" class="btn btn-warning">
+            30
+        </a>
+    </option>
+    <option value="40">
+        <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 40  })" class="btn btn-warning">
+            40
+        </a>
+    </option>
+    <option value="50">
+        <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 50 })" class="btn btn-warning">
+            50
+        </a>
+    </option>
+</select>*@
+
+@if (ViewBag.Page > 0)
+{
+    <a href="@Url.Action("Index", new { page = ViewBag.Page - 1 })"
+       class="btn btn-warning">
+        &laquo; Prev
+    </a>
+}
+@if (ViewBag.Page < ViewBag.MaxPage)
+{
+    <a href="@Url.Action("Index", new { page = ViewBag.Page + 1 })"
+       class="btn btn-warning">
+        Next &raquo;
+    </a>
+}
+
+
+
