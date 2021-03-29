@@ -47,7 +47,7 @@ namespace Garage3._0.Controllers
             ViewData["RegisNrSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Regist_desc" : "";
             ViewData["CurrentFilter"] = searchString;
 
-            var vehicles = mapper.ProjectTo<VehiclesListViewModel>(db.Vehicles).Take(15);
+            var vehicles = mapper.ProjectTo<VehiclesListViewModel>(db.Vehicles).Take(150);
             //var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType).AsQueryable();
 
             //var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);

@@ -79,76 +79,7 @@
 </audio>
 
 @*ToDo: Fix the text size when x small*@
-@*<table class="table text-light">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Brand)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Color)
-            </th>
-
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["RegisNrSortParm"]">@Html.DisplayNameFor(model => model.RegNr)</a>
-            </th>
-       
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfWheels)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ArrivalTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Member)
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["VehicleTypeSortParm"]">@Html.DisplayNameFor(model => model.VehicleType)</a>
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Brand)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Model)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Color)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RegNr)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumberOfWheels)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ArrivalTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Member.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VehicleType.TypeName)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-<br />
+<
 
 
 <p class="text-warning"> Chose results per page:
@@ -170,35 +101,7 @@
 
 </p>
    
-@*<select asp-for="">
-    <a href="@Url.Action("Index", new {page = ViewBag.Page , pagesize = 10 })" class="btn btn-warning">
-        <option value="10">
 
-            10
-
-        </option>
-    </a>
-    <option value="20">
-        <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 20   })" class="btn btn-warning">
-            20
-        </a>
-    </option>
-    <option value="30">
-        <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 30 })" class="btn btn-warning">
-            30
-        </a>
-    </option>
-    <option value="40">
-        <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 40  })" class="btn btn-warning">
-            40
-        </a>
-    </option>
-    <option value="50">
-        <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 50 })" class="btn btn-warning">
-            50
-        </a>
-    </option>
-</select>*@
 
 @if (ViewBag.Page > 0)
 {
