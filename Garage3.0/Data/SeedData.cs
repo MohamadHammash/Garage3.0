@@ -24,13 +24,16 @@ namespace Garage3._0.Data
                 }
                 var vehicles = GetVehicles();
                 var members = GetMembers();
-
+                var vehicleTypes = GetVehicleTypes();
                 await db.AddRangeAsync(members);
+                await db.AddRangeAsync(vehicleTypes);
 
                 foreach (var vehicle in vehicles)
                 {
                     var r = fake.Random.Int(1, 75);
                     vehicle.Member = members[r];
+                    int randomVehicleType = fake.Random.Int(0, 3);
+                    vehicle.VehicleType = vehicleTypes[randomVehicleType];
                 }
                 await db.AddRangeAsync(vehicles);
                 await db.SaveChangesAsync();
@@ -61,27 +64,31 @@ namespace Garage3._0.Data
         private static List<Vehicle> GetVehicles()
         {
             var vehicles = new List<Vehicle>();
+
             for (int i = 0; i < 60; i++)
             {
-                    var getRegNr = new CustomBuilders();
+                var getRegNr = new CustomBuilders();
                 var vehicle = new Vehicle
                 {
                     Model = fake.Vehicle.Model(),
                     Brand = fake.Vehicle.Manufacturer(),
                     Color = fake.Lorem.Word(),
-                    RegNr =  getRegNr.GetRegNr(),
+                    RegNr = getRegNr.GetRegNr(),
                     NumberOfWheels = fake.Random.Int(1, 10),
                     ArrivalTime = fake.Date.Recent(),
-                    VehicleType = new VehicleType
-                    {
-                        TypeName = fake.Vehicle.Type()
-                    },
                 };
                 vehicles.Add(vehicle);
             }
             return vehicles;
         }
-
-
+        private static List<VehicleType> GetVehicleTypes()
+        {
+            List<VehicleType> vehicleTypes = new List<VehicleType>();
+            vehicleTypes.Add(new VehicleType { TypeName = "Car", NumberOfSpots = 1 });
+            vehicleTypes.Add(new VehicleType { TypeName = "Truck", NumberOfSpots = 2 });
+            vehicleTypes.Add(new VehicleType { TypeName = "Motorcycle", NumberOfSpots = 1 });
+            vehicleTypes.Add(new VehicleType { TypeName = "Buss", NumberOfSpots = 3 });
+            return vehicleTypes;
+        }
     }
 }
