@@ -27,13 +27,49 @@ namespace Garage3._0.Controllers
         }
 
         // GET: Members
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+
+        //    var model = mapper.ProjectTo<MembersListViewModel>(db.Members).Take(15);
+        //    return View(await model.ToListAsync());
+
+        //    //return View(await db.Members.ToListAsync());
+        //}
+
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
 
-            var model = mapper.ProjectTo<MembersListViewModel>(db.Members).Take(15);
-            return View(await model.ToListAsync());
+            ViewData["FullNameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "fullName_desc" : "";
 
-            //return View(await db.Members.ToListAsync());
+
+            ViewData["PersonNumberSortParm"] = String.IsNullOrEmpty(sortOrder) ? "personNumber_desc" : "";
+
+            ViewData["CurrentFilter"] = searchString;
+            //var members = db.Members;
+            var members = from m in db.Members
+                          select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                //  members = members.Where(s => s.FirstName.ToUpper() StartsWith(searchString.Substring(0).ToUpper()+searchString.Substring(1).ToUpper()));
+                members = members.Where(s => s.FirstName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "fullName_desc":
+
+                    members = members.OrderByDescending(m => m.FirstName.Substring(0,2));
+                    break;
+                case "personNumber_desc":
+                    members = members.OrderByDescending(s => s.Personnummer);
+                    break;
+                default:
+                    members = members.OrderBy(m => m.FirstName);
+                    break;
+            }
+            var model = mapper.ProjectTo<MembersListViewModel>(members);
+            return View(await model.AsNoTracking().Take(15).ToListAsync());
         }
 
         // GET: Members/Details/5

@@ -13,7 +13,10 @@ namespace Garage3._0.Data
     {
         public MapperProfile()
         {
-            CreateMap<Member, MembersListViewModel>();
+            CreateMap<Member, MembersListViewModel>()
+                .ForMember(
+                dest => dest.FullName,
+                from => from.MapFrom(m => m.FullName));
             CreateMap<Member, MembersAddViewModel>().ReverseMap();
 
             CreateMap<Member, MembersDetailsViewModel>()

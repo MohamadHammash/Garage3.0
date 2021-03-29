@@ -1,4 +1,6 @@
-﻿@model IEnumerable<VehiclesListViewModel>
+﻿@*@model IEnumerable<Vehicle>*@
+@*@model IEnumerable<Garage3._0.Models.Entities.Vehicle>*@
+@model IEnumerable<VehiclesListViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -8,6 +10,17 @@
 <p>
     <a asp-action="Park">Create New</a>
 </p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
 <div class="container myTable">
 
 <div class="row">
@@ -35,6 +48,7 @@
         </div>
         <div class="col-md-2 col-3 col-sm-3 ">
             @Html.DisplayFor(modelItem => item.RegNr)
+          @*  <a asp-action="Index" asp-route-sortOrder="@ViewData["RegisNrSortParm"]">@Html.DisplayNameFor(model => model.RegNr)</a>*@
         </div>
         <div class="col-md-2 col-3 col-sm-3 ">
             @Html.DisplayFor(modelItem => item.ArrivalTime)
@@ -57,3 +71,72 @@
 </audio>
 
 @*ToDo: Fix the text size when x small*@
+@*<table class="table text-light">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["RegisNrSortParm"]">@Html.DisplayNameFor(model => model.RegNr)</a>
+            </th>
+       
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfWheels)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArrivalTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Member)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["VehicleTypeSortParm"]">@Html.DisplayNameFor(model => model.VehicleType)</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegNr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfWheels)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArrivalTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Member.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleType.TypeName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>*@

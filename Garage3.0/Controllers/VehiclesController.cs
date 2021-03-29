@@ -27,14 +27,55 @@ namespace Garage3._0.Controllers
         }
 
         // GET: Vehicles
-        public async Task<IActionResult> Index()
-        {
+        //public async Task<IActionResult> Index()
+        //{
 
-            var model = mapper.ProjectTo<VehiclesListViewModel>(db.Vehicles).Take(15);
-            return View(await model.ToListAsync());
+        //    var model = mapper.ProjectTo<VehiclesListViewModel>(db.Vehicles).Take(15);
+        //    return View(await model.ToListAsync());
+        //    //var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
+        //    //return View(await vehicles.ToListAsync());
+        ////public async Task<IActionResult> Index()
+        ////{
+        ////    var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
+        ////    return View(await vehicles.ToListAsync());
+        //}
+
+
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        {
+            ViewData["VehicleTypeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "fordonType_desc" : "";
+            ViewData["RegisNrSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Regist_desc" : "";
+            ViewData["CurrentFilter"] = searchString;
+
+                var vehicles = mapper.ProjectTo<VehiclesListViewModel>(db.Vehicles).Take(15);
+                //var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType).AsQueryable();
+
             //var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
-            //return View(await vehicles.ToListAsync());
+            //var vehicles = db.Vehicles;
+            
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                vehicles = vehicles.Where(v => v.RegNr.StartsWith(searchString));
+
+            }
+            switch (sortOrder)
+            {
+                case "fordonType_desc":
+                    vehicles = vehicles.OrderByDescending(v => v.VehicleType.TypeName);
+                    break;
+                case "Regist_desc":
+                    vehicles = vehicles.OrderByDescending(v => v.RegNr);
+                    break;
+                default:
+                    vehicles = vehicles.OrderBy(v => v.VehicleType.TypeName);
+                    break;
+            }
+
+
+            return View(await vehicles.AsNoTracking().ToListAsync());
         }
+
 
         // GET: Vehicles/Details/5
         public async Task<IActionResult> Details(int? id)
