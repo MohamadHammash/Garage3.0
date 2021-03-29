@@ -1,4 +1,5 @@
 ﻿using Garage3._0.Models.Entities;
+using Garage3._0.Validations;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Garage3._0.Models.ViewModels.MembersViewModels
         public string FirstName { get; set; }
         [Required]
         [Display(Name = "Last Name")]
+        [NotEqual("FirstName", ErrorMessage =" Last name shoud not be the same as the first name")]
         public string LastName { get; set; }
         [Required]
         [Remote("PersNumExists", "Members", AdditionalFields = ("Id"))]
