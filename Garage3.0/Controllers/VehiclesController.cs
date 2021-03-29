@@ -41,7 +41,7 @@ namespace Garage3._0.Controllers
         //}
 
 
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, int page = 0, int pagesize = 20)
         {
             ViewData["VehicleTypeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "fordonType_desc" : "";
             ViewData["RegisNrSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Regist_desc" : "";
@@ -72,26 +72,28 @@ namespace Garage3._0.Controllers
                     break;
             }
 
-
-            return View(await vehicles.AsNoTracking().ToListAsync());
-        }
-        
-        //GET: Vehicles
-        public async Task<IActionResult> Index(int page = 0, int pagesize = 20)
-        {
-            var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
-            int PageSize = pagesize; // you can always do something more elegant to set this
+            //var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
+            int PageSize = pagesize; // 
 
             var count = vehicles.Count();
 
-            var data = vehicles.Skip((int)(page * PageSize)).Take(PageSize).ToList();
+            var data = vehicles.Skip((int)(page * PageSize)).Take(PageSize);
 
             this.ViewBag.MaxPage = (count / PageSize) - (count % PageSize == 0 ? 1 : 0);
 
             this.ViewBag.Page = page;
 
-            return View(data);
+
+            return View(await data.ToListAsync());
         }
+        
+        //GET: Vehicles
+        //public async Task<IActionResult> Index()
+        //{
+            
+
+        //    return View(data);
+        //}
             
         
 
