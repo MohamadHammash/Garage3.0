@@ -5,8 +5,7 @@
 <h1 class="text-center text-warning">Members List</h1>
 
 @{
-    <partial name="_SearchView" />
-}
+                <partial name="_SearchView" /> }
 <p>
     <a asp-action="Add" class="btn btn-warning">Add New</a>
 </p>
@@ -48,9 +47,30 @@
         <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
         <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
     </td>
-</tr>}
+</tr>
+}
     </tbody>
 </table>
+
+
+<p class="text-warning"> Chose results per page:
+    <a href="@Url.Action("Index", new {page = ViewBag.Page , pagesize = 10 })" class="btn btn-warning">
+        10
+    </a>
+    <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 20   })" class="btn btn-warning">
+        20
+    </a>
+    <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 30 })" class="btn btn-warning">
+        30
+    </a>
+    <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 40  })" class="btn btn-warning">
+        40
+    </a>
+    <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 50 })" class="btn btn-warning">
+        50
+    </a>
+
+</p>
 
 @if (ViewBag.Page > 0)
 {
@@ -63,7 +83,9 @@
 <a href="@Url.Action("Index", new { page = ViewBag.Page + 1 })"
    class="btn btn-warning">
     Next &raquo;
-</a> } @*https://via.placeholder.com/150*@ @*@foreach (var item in Model)
+</a> } @*https://via.placeholder.com/150*@
+    
+    @*@foreach (var item in Model)
     {
 
         <div class="container">

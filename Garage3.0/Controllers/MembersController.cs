@@ -27,11 +27,11 @@ namespace Garage3._0.Controllers
         }
 
         // GET: Members
-        public async Task<IActionResult> Index(int page = 0)
+        public async Task<IActionResult> Index(int page = 0, int pagesize = 20)
         {
             var model = mapper.ProjectTo<MembersListViewModel>(db.Members).Take(150);
            
-            const int PageSize = 20; // you can always do something more elegant to set this
+             int PageSize = pagesize; // you can always do something more elegant to set this
 
             var count = model.Count();
 
@@ -131,6 +131,7 @@ namespace Garage3._0.Controllers
                 {
                     db.Update(member);
                     await db.SaveChangesAsync();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {

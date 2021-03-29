@@ -25,10 +25,10 @@ namespace Garage3._0.Controllers
 
         
         //GET: Vehicles
-        public async Task<IActionResult> Index(int page = 0)
+        public async Task<IActionResult> Index(int page = 0, int pagesize = 20)
         {
             var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
-            const int PageSize = 20; // you can always do something more elegant to set this
+            int PageSize = pagesize; // you can always do something more elegant to set this
 
             var count = vehicles.Count();
 
