@@ -150,7 +150,7 @@ namespace Garage3._0.Controllers
                 ViewData["VehicleTypeId"] = new SelectList(db.Set<VehicleType>(), "Id", "Id", vehicle.VehicleTypeId);
                 db.Add(vehicle);
                 await db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AddSuccess));
             }
             //ViewData["MemberId"] = new SelectList(db.Set<Member>(), "Id", "FirstName", vehicle.MemberId);
             //ViewData["VehicleTypeId"] = new SelectList(db.Set<VehicleType>(), "Id", "Id", vehicle.VehicleTypeId);
@@ -206,7 +206,7 @@ namespace Garage3._0.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(EditSuccess));
             }
             ViewData["MemberId"] = new SelectList(db.Set<Member>(), "Id", "FirstName", vehicle.MemberId);
             ViewData["VehicleTypeId"] = new SelectList(db.Set<VehicleType>(), "Id", "Id", vehicle.VehicleTypeId);
@@ -241,7 +241,7 @@ namespace Garage3._0.Controllers
             var vehicle = await db.Vehicles.FindAsync(id);
             db.Vehicles.Remove(vehicle);
             await db.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(DeleteSuccess));
         }
 
         private bool VehicleExists(int id)
@@ -275,6 +275,21 @@ namespace Garage3._0.Controllers
                               Value = t.ToString()
                           })
                           .ToListAsync();
+        }
+
+        public IActionResult EditSuccess()
+        {
+            return View();
+        }
+
+        public IActionResult AddSuccess()
+        {
+            return View();
+        }
+
+        public IActionResult DeleteSuccess()
+        {
+            return View();
         }
 
     }

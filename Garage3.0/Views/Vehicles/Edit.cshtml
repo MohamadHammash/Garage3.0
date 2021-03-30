@@ -9,60 +9,61 @@
 
 
 <hr />
-<div class="row justify-content-center text-white"    >
+<div class="row justify-content-center  myTable text-black"    >
     <div class="col-md-4">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-white"></div>
+            <div asp-validation-summary="ModelOnly" ></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Brand" class="control-label"></label>
-                <input asp-for="Brand" class="form-control bg-transparent text-white" />
+                <input asp-for="Brand" class="form-control bg-dark text-white" />
                 <span asp-validation-for="Brand" class="text-primary"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Model" class="control-label"></label>
-                <input asp-for="Model" class="form-control bg-transparent text-white" />
+                <input asp-for="Model" class="form-control bg-dark text-white" />
                 <span asp-validation-for="Model" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Color" class="control-label"></label>
-                <input asp-for="Color" class="form-control bg-transparent text-white" />
+                <input asp-for="Color" class="form-control bg-dark text-white" />
                 <span asp-validation-for="Color" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RegNr" class="control-label"></label>
-                <input asp-for="RegNr" class="form-control bg-transparent text-white" />
+                <input asp-for="RegNr" class="form-control bg-dark text-white" />
                 <span asp-validation-for="RegNr" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="NumberOfWheels" class="control-label"></label>
-                <input asp-for="NumberOfWheels" class="form-control bg-transparent text-white" />
+                <input asp-for="NumberOfWheels" class="form-control bg-dark text-white" />
                 <span asp-validation-for="NumberOfWheels" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ArrivalTime" class="control-label"></label>
-                <input asp-for="ArrivalTime" class="form-control bg-transparent text-white" />
+                <input asp-for="ArrivalTime" class="form-control bg-dark text-white" />
                 <span asp-validation-for="ArrivalTime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="VehicleTypeId" class="control-label"></label>
-                <select asp-for="VehicleTypeId" class="form-control bg-transparent text-white" asp-items="ViewBag.VehicleTypeId"></select>
+                <select asp-for="VehicleTypeId" class="form-control bg-dark text-white" asp-items="ViewBag.VehicleTypeId"></select>
                 <span asp-validation-for="VehicleTypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="MemberId" class="control-label"></label>
-                <select asp-for="MemberId" class="form-control bg-transparent text-white" asp-items="ViewBag.MemberId"></select>
+                <select asp-for="MemberId" class="form-control bg-dark text-white" asp-items="ViewBag.MemberId"></select>
                 <span asp-validation-for="MemberId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group justify-content-between">
                 <input type="submit" value="Save" class="btn btn-warning" />
+                <a asp-action="Index" class="btn btn-warning">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" class="btn btn-warning">Back to List</a>
+    
 </div>
 
 @section Scripts {

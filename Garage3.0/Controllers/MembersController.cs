@@ -145,7 +145,7 @@ namespace Garage3._0.Controllers
 
                     db.Add(member);
                 await db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AddSuccess));
             }
             return View(viewmodel);
         }
@@ -199,7 +199,7 @@ namespace Garage3._0.Controllers
                     }
                 }
                 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(SuccessEdit));
             }
             return View(member);
         }
@@ -223,14 +223,14 @@ namespace Garage3._0.Controllers
         }
 
         // POST: Members/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Remove")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveConfirmed(int id)
         {
             var member = await db.Members.FindAsync(id);
             db.Members.Remove(member);
             await db.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(DeleteSuccess));
         }
 
         private bool MemberExists(int id)
@@ -246,5 +246,20 @@ namespace Garage3._0.Controllers
             }
             return Json(true);
         }
+        public IActionResult SuccessEdit()
+        {
+            return View();
+        }
+
+        public IActionResult AddSuccess()
+        {
+            return View();
+        }
+
+        public IActionResult DeleteSuccess()
+        {
+            return View();
+        }
+
     }
 }

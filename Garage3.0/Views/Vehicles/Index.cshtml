@@ -16,10 +16,10 @@
 <h1 class="text-warning text-center">Vehicles list</h1>
 
 <p>
-    <a asp-action="Park">Create New</a>
+    <a asp-action="Park"class="btn btn-warning" >Add Vehicle</a>
 </p>
 
-<form asp-action="Index" method="get">
+@*<form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
             Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
@@ -27,9 +27,9 @@
             <a asp-action="Index">Back to Full List</a>
         </p>
     </div>
-</form>
+</form>*@
 
-<div class="container myTable">
+<div class="container myTable legend">
 
 <div class="row">
     <div class="col-md-2 col-3 col-sm-3 text-dark ">
@@ -79,7 +79,7 @@
 </audio>
 
 @*ToDo: Fix the text size when x small*@
-<
+
 
 
 <p class="text-warning"> Chose results per page:
