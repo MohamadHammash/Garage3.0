@@ -147,14 +147,8 @@ namespace Garage3._0.Controllers
             {
                 var vehicle = mapper.Map<Vehicle>(viewModel);
                 vehicle.ArrivalTime = DateTime.Now;
-
-
-                //if (isTeenager())
-                //{
-                //    ModelState.AddModelError("MemberId", "Members under 18 are not allowed to park in the garage");
-
-                //}
-
+              //  vehicle.Member = default;
+                              
 
                 db.Add(vehicle);
                 await db.SaveChangesAsync();
@@ -278,13 +272,11 @@ namespace Garage3._0.Controllers
         private async Task<IEnumerable<SelectListItem>> GetTypeAsync()
         {
             return await db.VehicleTypes
-                          .Select(v => v.TypeName)
-                          .Distinct()
                           .Select(t => new SelectListItem
                           {
-                              Text = t.ToString(),
-                              Value = t.ToString()
-                          })
+                              Text = t.TypeName.ToString(),
+                              Value = t.Id.ToString()
+                          }).Distinct()
                           .ToListAsync();
         }
         private int GetAge(string personnummer)
@@ -302,8 +294,22 @@ namespace Garage3._0.Controllers
             }
             return true;
         }
-        
 
+        public async Task<IActionResult> SearchVehicle(string searchString , int? type)
+        {
+           
+            var query = string.IsNullOrWhiteSpace(searchString) ?
+                db.Vehicles :
+                db.Vehicles.Where(m => m.RegNr.StartsWith(searchString));
+            query = type == null ?
+                  query :
+                  query.Where(m => m.VehicleTypeId == type);
+
+            
+            var model = mapper.ProjectTo<VehiclesListViewModel>(query);
+
+            return View(nameof(Index), await model.ToListAsync());
+        }
 
 
         public IActionResult EditSuccess()

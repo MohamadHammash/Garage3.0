@@ -1,6 +1,5 @@
-﻿@*@model IEnumerable<Vehicle>*@
-@*@model IEnumerable<Garage3._0.Models.Entities.Vehicle>*@
-@model IEnumerable<VehiclesListViewModel>
+﻿@model IEnumerable<VehiclesListViewModel>
+@inject ITypeSelectService service
 
 
 @{
@@ -8,115 +7,140 @@
 }
 
 
-@{
-    <partial name="_SearchView" />
-}
+<section class="search-sec mt-5">
+    <div class="container">
+        <form asp-action="SearchVehicle" asp-controller="Vehicles">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <input name="searchString" type="text" class="form-control search-slt" placeholder="Enter lisence NO">
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <select name="type" asp-items="@await service.GetTypeAsync()" class="form-control search-slt">
+                            <option selected="selected" value="">Please select a type</option>
+                        </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <button type="submit" class="btn btn-danger wrn-btn"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
 
 
 <h1 class="text-warning text-center">Vehicles list</h1>
 
 <p>
-    <a asp-action="Park"class="btn btn-warning" >Add Vehicle</a>
+    <a asp-action="Park" class="btn btn-warning">Park a new vehicle</a>
 </p>
 
-@*<form asp-action="Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Back to Full List</a>
-        </p>
-    </div>
-</form>*@
+
 
 <div class="container myTable legend">
 
-<div class="row">
-    <div class="col-md-2 col-3 col-sm-3 text-dark ">
-        @Html.DisplayNameFor(model => model.MemberFullName)
+        <div class="row">
+            <div class="col-md-2 col-3 col-sm-3 text-dark ">
+                @Html.DisplayNameFor(model => model.MemberFullName)
+            </div>
+            <div class="col-md-2 col-3 col-sm-3 text-dark ">
+                @Html.DisplayNameFor(model => model.RegNr)
+            </div>
+            <div class="col-md-2 col-3 col-sm-3 text-dark ">
+                @Html.DisplayNameFor(model => model.ArrivalTime)
+            </div>
+            <div class="col-md-2 col-3 col-sm-3 text-dark ">
+                @Html.DisplayNameFor(model => model.VehicleType)
+            </div>
+            <div class="col-md-2 col-3 col-sm-3 text-dark ">
+                @Html.DisplayNameFor(model => model.Membership)
+            </div>
+            <div class="col-md-2 col-3 col-sm-3 text-dark ">
+                @Html.DisplayNameFor(model => model.ParkingTime)
+            </div>
+        </div>
     </div>
-    <div class="col-md-2 col-3 col-sm-3 text-dark ">
-        @Html.DisplayNameFor(model => model.RegNr)
-    </div>
-    <div class="col-md-2 col-3 col-sm-3 text-dark ">
-        @Html.DisplayNameFor(model => model.ArrivalTime)
-    </div>
-    <div class="col-md-2 col-3 col-sm-3 text-dark ">
-        @Html.DisplayNameFor(model => model.VehicleType)
-    </div>
-</div>
-</div>
-<div class="container myTable legend">
-    @foreach (var item in Model)
-    {
+    <div class="container myTable legend">
+        @foreach (var item in Model)
+        {
 
-    <div class="row">
-        <div class="col-md-2 col-3 col-sm-3">
-            @Html.DisplayFor(modelItem => item.MemberFullName)
+        <div class="row">
+            <div class="col-md-2 col-3 col-sm-3">
+                @Html.DisplayFor(modelItem => item.MemberFullName)
+            </div>
+            <div class="col-md-2 col-3 col-sm-3 ">
+                @Html.DisplayFor(modelItem => item.RegNr)
+                @*  <a asp-action="Index" asp-route-sortOrder="@ViewData["RegisNrSortParm"]">@Html.DisplayNameFor(model => model.RegNr)</a>*@
+            </div>
+            <div class="col-md-2 col-3 col-sm-3 ">
+                @Html.DisplayFor(modelItem => item.ArrivalTime)
+            </div>
+            <div class="col-md-2 col-3 col-sm-3">
+                @Html.DisplayFor(modelItem => item.VehicleType.TypeName)
+            </div>
+            <div class="col-md-2 col-3 col-sm-3">
+                @Html.DisplayFor(modelItem => item.Membership)
+            </div>
+            <div class="col-md-2 col-3 col-sm-3">
+                @Html.DisplayFor(modelItem => item.ParkingTime)
+            </div>
+            <div class="col-md-4 col-12 justify-content-center justify-content-md-between offset-sm-4 col-sm-4 offset-md-0">
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit |</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Details |</a>
+                <a asp-action="Unpark" asp-route-id="@item.Id">Leave</a>
+            </div>
         </div>
-        <div class="col-md-2 col-3 col-sm-3 ">
-            @Html.DisplayFor(modelItem => item.RegNr)
-          @*  <a asp-action="Index" asp-route-sortOrder="@ViewData["RegisNrSortParm"]">@Html.DisplayNameFor(model => model.RegNr)</a>*@
-        </div>
-        <div class="col-md-2 col-3 col-sm-3 ">
-            @Html.DisplayFor(modelItem => item.ArrivalTime)
-        </div>
-        <div class="col-md-2 col-3 col-sm-3">
-            @Html.DisplayFor(modelItem => item.VehicleType.TypeName)
-        </div>
-        <div class="col-md-4 col-12 justify-content-center justify-content-md-between offset-sm-4 col-sm-4 offset-md-0">
-            <a asp-action="Edit" asp-route-id="@item.Id">Edit |</a>
-            <a asp-action="Details" asp-route-id="@item.Id">Details |</a>
-            <a asp-action="Unpark" asp-route-id="@item.Id">Leave</a>
-        </div>
+        }
     </div>
-    }
-</div>
 
 
 
-<audio controls="controls" src="~/Assest/carstartgarage.mp3" id="audioPVM">
-</audio>
+    <audio controls="controls" src="~/Assest/carstartgarage.mp3" id="audioPVM">
+    </audio>
 
 @*ToDo: Fix the text size when x small*@
 
 
 
-<p class="text-warning"> Chose results per page:
-    <a href="@Url.Action("Index", new {page = ViewBag.Page , pagesize = 10 })" class="btn btn-warning">
-        10
-    </a>
-    <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 20   })" class="btn btn-warning">
-        20
-    </a>
-    <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 30 })" class="btn btn-warning">
-        30
-    </a>
-    <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 40  })" class="btn btn-warning">
-        40
-    </a>
-    <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 50 })" class="btn btn-warning">
-        50
-    </a>
+    <p class="text-warning">
+        Chose results per page:
+        <a href="@Url.Action("Index", new {page = ViewBag.Page , pagesize = 10 })" class="btn btn-warning">
+            10
+        </a>
+        <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 20   })" class="btn btn-warning">
+            20
+        </a>
+        <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 30 })" class="btn btn-warning">
+            30
+        </a>
+        <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 40  })" class="btn btn-warning">
+            40
+        </a>
+        <a href="@Url.Action("Index", new { page = ViewBag.Page , pagesize = 50 })" class="btn btn-warning">
+            50
+        </a>
 
-</p>
-   
+    </p>
 
 
-@if (ViewBag.Page > 0)
-{
-    <a href="@Url.Action("Index", new { page = ViewBag.Page - 1 })"
-       class="btn btn-warning">
-        &laquo; Prev
-    </a>
-}
-@if (ViewBag.Page < ViewBag.MaxPage)
-{
-    <a href="@Url.Action("Index", new { page = ViewBag.Page + 1 })"
-       class="btn btn-warning">
-        Next &raquo;
-    </a>
-}
+
+    @if (ViewBag.Page > 0)
+    {
+        <a href="@Url.Action("Index", new { page = ViewBag.Page - 1 })"
+           class="btn btn-warning">
+            &laquo; Prev
+        </a>
+    }
+    @if (ViewBag.Page < ViewBag.MaxPage)
+    {
+        <a href="@Url.Action("Index", new { page = ViewBag.Page + 1 })"
+           class="btn btn-warning">
+            Next &raquo;
+        </a>
+    }
 
 
 

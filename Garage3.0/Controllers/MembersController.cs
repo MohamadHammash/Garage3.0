@@ -84,7 +84,7 @@ namespace Garage3._0.Controllers
         //public async Task<IActionResult> Index(int page = 0, int pagesize = 20)
         //{
         //    var model =  mapper.ProjectTo<MembersListViewModel>(db.Members).Take(150);
-           
+
         //     int PageSize = pagesize; // you can always do something more elegant to set this
 
         //    var count = model.Count();
@@ -97,7 +97,7 @@ namespace Garage3._0.Controllers
 
 
         //    return View(data);
-            
+
         //}
 
         // GET: Members/Details/5
@@ -112,7 +112,7 @@ namespace Garage3._0.Controllers
                 .ProjectTo<MembersDetailsViewModel>(db.Members)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-           
+
             if (member == null)
             {
                 return NotFound();
@@ -132,7 +132,7 @@ namespace Garage3._0.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add( MembersAddViewModel viewmodel)
+        public async Task<IActionResult> Add(MembersAddViewModel viewmodel)
         {
             if (ModelState.IsValid)
             {
@@ -145,7 +145,7 @@ namespace Garage3._0.Controllers
                 }
                 else
                 {
-                member.ProEndDate = DateTime.Today.AddMonths(1);
+                    member.ProEndDate = DateTime.Today.AddMonths(1);
                 }
 
 
@@ -191,6 +191,8 @@ namespace Garage3._0.Controllers
                 try
                 {
                     db.Update(member);
+                    db.Entry(member).Property(x => x.MbShipRegDate).IsModified = false;
+                    db.Entry(member).Property(x => x.ProEndDate).IsModified = false;
                     await db.SaveChangesAsync();
 
                 }
@@ -282,6 +284,26 @@ namespace Garage3._0.Controllers
                 return false;
             }
             return true;
+        }
+        //public IActionResult Filter(MembersListViewModel viewModel)
+        //{
+        //    var members = string.IsNullOrWhiteSpace(viewModel.FullName) ?
+        //        db.Members :
+        //        db.Members.Where(m => (m.FirstName + " " + m.LastName).StartsWith(viewModel.FullName));
+
+        //    members = viewModel.FullName == null ?
+        //        members :
+        //        members.Where(V => V.FirstName + " " + V.LastName == viewModel.FullName);
+        //    var model = mapper.ProjectTo<MembersListViewModel>(members);
+        //    return View(nameof(Index), model);
+        //}
+        public async Task<IActionResult> SearchMember(string searchString)
+        {
+            var query = string.IsNullOrWhiteSpace(searchString) ?
+                db.Members :
+             db.Members.Where(m => m.FirstName.StartsWith(searchString));
+            var model = mapper.ProjectTo<MembersListViewModel>(query);
+            return View(nameof(Index), await model.ToListAsync());
         }
 
     }
