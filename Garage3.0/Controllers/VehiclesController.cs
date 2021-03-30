@@ -250,7 +250,7 @@ namespace Garage3._0.Controllers
             var vehicle = await db.Vehicles.FindAsync(id);
            
 
-            db.Vehicles.Update(vehicle);
+            db.Vehicles.Remove(vehicle);
             await db.SaveChangesAsync();
             return RedirectToAction(nameof(DeleteSuccess));
         }
