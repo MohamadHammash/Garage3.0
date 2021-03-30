@@ -26,7 +26,12 @@ namespace Garage3._0.Data
 
 
             CreateMap<Vehicle, VehiclesListViewModel>();
-            CreateMap<Vehicle, VehiclesParkViewModel>().ReverseMap();
+            CreateMap<Vehicle, VehiclesParkViewModel>()
+                 .ForMember(
+                dest => dest.MemberPersonnummer,
+                from => from.MapFrom(p => p.Member.Personnummer)
+                )
+                .ReverseMap();
 
 
         }
