@@ -223,7 +223,7 @@ namespace Garage3._0.Controllers
         }
 
         // POST: Members/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Remove")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveConfirmed(int id)
         {
