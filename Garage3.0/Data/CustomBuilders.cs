@@ -36,5 +36,12 @@ namespace Garage3._0.Data
             int range = (DateTime.Today - start.AddDays(-1)).Days;
             return start.AddDays(gen.Next(range));
         }
+        public int GetAge( string personnummer)
+        {
+             //personnummer = GetPersonnummer();
+            var parseYear = int.TryParse(personnummer.Substring(0, 4), out int year);
+           
+            return year;
+        }
     }
 }

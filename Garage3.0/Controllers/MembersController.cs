@@ -139,7 +139,14 @@ namespace Garage3._0.Controllers
 
                 var member = mapper.Map<Member>(viewmodel);
                 member.MbShipRegDate = DateTime.Today;
+                if (IsSenior(member.Personnummer))
+                {
+                    member.ProEndDate = DateTime.Today.AddYears(2);
+                }
+                else
+                {
                 member.ProEndDate = DateTime.Today.AddMonths(1);
+                }
 
 
 
@@ -259,6 +266,22 @@ namespace Garage3._0.Controllers
         public IActionResult DeleteSuccess()
         {
             return View();
+        }
+
+        private int GetAge(string personnummer)
+        {
+            var builder = new CustomBuilders();
+            var year = builder.GetAge(personnummer);
+            return year;
+        }
+        private bool IsSenior(string personnummer)
+        {
+            var year = GetAge(personnummer);
+            if (DateTime.Today.Year - year < 65)
+            {
+                return false;
+            }
+            return true;
         }
 
     }
