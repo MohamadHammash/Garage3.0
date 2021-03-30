@@ -121,8 +121,7 @@ namespace Garage3._0.Controllers
         // GET: Vehicles/Park
         public IActionResult Park()
         {
-            ViewData["MemberId"] = new SelectList(db.Set<Member>(), "Id", "Id");
-            ViewData["VehicleTypeId"] = new SelectList(db.Set<VehicleType>(), "Id", "Id");
+           
             return View();
         }
 
@@ -138,22 +137,30 @@ namespace Garage3._0.Controllers
             {
                 ModelState.AddModelError("RegNr", "Vehicle already exists");
             }
+            var owner = db.Members.FirstOrDefault(m => m.Id == viewModel.MemberId);
+            if (isTeenager(owner.Personnummer))
+            {
+                ModelState.AddModelError("MemberId", "Members under 18 are not allowed to park in the garage");
+            }
+           
             if (ModelState.IsValid)
             {
                 var vehicle = mapper.Map<Vehicle>(viewModel);
                 vehicle.ArrivalTime = DateTime.Now;
-                
-                //vehicle.VehicleType.NumberOfSpots = faker.Random.Int(1, 3);
 
 
-                ViewData["MemberId"] = new SelectList(db.Set<Member>(), "Id", "Id", vehicle.MemberId);
-                ViewData["VehicleTypeId"] = new SelectList(db.Set<VehicleType>(), "Id", "Id", vehicle.VehicleTypeId);
+                //if (isTeenager())
+                //{
+                //    ModelState.AddModelError("MemberId", "Members under 18 are not allowed to park in the garage");
+
+                //}
+
+
                 db.Add(vehicle);
                 await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["MemberId"] = new SelectList(db.Set<Member>(), "Id", "FirstName", vehicle.MemberId);
-            //ViewData["VehicleTypeId"] = new SelectList(db.Set<VehicleType>(), "Id", "Id", vehicle.VehicleTypeId);
+           
             return View(viewModel);
         }
 
@@ -278,6 +285,24 @@ namespace Garage3._0.Controllers
                           })
                           .ToListAsync();
         }
+        private int GetAge(string personnummer)
+        {
+            var builder = new CustomBuilders();
+            var year = builder.GetAge(personnummer);
+            return year; 
+        }
+        private bool isTeenager(string personnummer)
+        {
+            var year = GetAge(personnummer);
+            if (DateTime.Today.Year - year >= 18)
+            {
+                return false;
+            }
+            return true;
+        }
+        
+
+
 
     }
 }

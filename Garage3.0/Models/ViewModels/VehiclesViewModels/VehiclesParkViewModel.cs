@@ -26,6 +26,7 @@ namespace Garage3._0.Models.ViewModels.VehiclesViewModels
         [Display(Name = "Number of wheels")]
         public int NumberOfWheels { get; set; }
         public DateTime ArrivalTime  { get; set; }
+        public string MemberPersonnummer { get; set; }
         [Display(Name = "Owner")]
         public int MemberId { get; set; }
         [Display(Name = "Type")]
