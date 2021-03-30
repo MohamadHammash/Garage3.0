@@ -16,32 +16,32 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
+                <input asp-for="FirstName" class="form-control bg-dark text-white" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
+                <input asp-for="LastName" class="form-control bg-dark text-white" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Personnummer" class="control-label"></label>
-                <input asp-for="Personnummer" class="form-control" />
+                <input asp-for="Personnummer" class="form-control bg-dark text-white" />
                 <span asp-validation-for="Personnummer" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="MbShipRegDate" class="control-label"></label>
-                <input asp-for="MbShipRegDate" class="form-control" />
+                <input asp-for="MbShipRegDate" class="form-control bg-dark text-white" />
                 <span asp-validation-for="MbShipRegDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ProEndDate" class="control-label"></label>
-                <input asp-for="ProEndDate" class="form-control" />
+                <input asp-for="ProEndDate" class="form-control bg-dark text-white" />
                 <span asp-validation-for="ProEndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" onclick="BootstrapAlert(lblMsg, " Congrats! You've won a dismissable booty message.",
-                       BootstrapAlertType.Success, True);" />
+                <input type="submit" value="Save" class="btn btn-warning" />
+                <a asp-action="Index" class="btn btn-warning">Back to List</a>
             </div>
             
         </form>
@@ -50,9 +50,7 @@
 
 
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 
 

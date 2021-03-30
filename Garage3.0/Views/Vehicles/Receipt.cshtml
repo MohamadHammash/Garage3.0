@@ -1,0 +1,110 @@
+﻿@model LeavingVehiclesViewModel
+
+
+<button type="button" class="btn btn-danger text-white" data-toggle="modal" data-target="#exampleModalCenter">
+    Unpark
+</button>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-warning" id="exampleModalLongTitle">Before you go....</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-warning">
+                Do you need your Receipt?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+                    Yes
+                </button>
+                <form asp-action="Unpark">
+                    <input type="hidden" asp-for="LeavingVehicle.Id" />
+                    <input type="submit" value="No" class="btn btn-warning w-100" />
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-warning" id="exampleModalLabel">Your Receipt</h5>
+
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+
+                    <h4 class="text-warning">Receipt details:</h4>
+                    <hr />
+                    <dl class="row w-100 text-warning">
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.LeavingVehicle.Member)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.LeavingVehicle.Member.FullName)
+                        </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.LeavingVehicle.VehicleType)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.LeavingVehicle.VehicleType.TypeName)
+                        </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.LeavingVehicle.RegNr)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.LeavingVehicle.RegNr)
+                        </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.LeavingVehicle.Color)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.LeavingVehicle.Color)
+                        </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.LeavingVehicle.Brand)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.LeavingVehicle.Brand)
+                        </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.LeavingVehicle.Model)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.LeavingVehicle.Model)
+                        </dd>
+                        <dt class="col-sm-6">
+                            Total parking (hours)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.ParkingTime)
+                        </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.ParkingCost)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.ParkingCost)
+                        </dd>
+                    </dl>
+
+                </div>
+
+                <hr />
+                <form asp-action="Unpark">
+                    <input type="hidden" asp-for="LeavingVehicle.Id" />
+                    <input type="submit" value="Unpark" class="btn btn-warning w-100" />
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+

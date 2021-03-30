@@ -4,13 +4,13 @@
     ViewData["Title"] = "Unpark";
 }
 
-<h1>Unpark</h1>
+<h1 class="text-warning text-center">Unpark Vehicle</h1>
 
-<h3>Are you sure you want to Unpark this?</h3>
+<h3 class="text-warning ">Are you sure you want to unpark this?</h3>
 <div>
-    <h4>Vehicle</h4>
+
     <hr />
-    <dl class="row myTable">
+    <dl class="row myTable text-black">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.LeavingVehicle.Brand)
         </dt>
@@ -61,10 +61,15 @@
             @Html.DisplayFor(model => model.LeavingVehicle.VehicleType.TypeName)
         </dd>
     </dl>
-    
-    <form asp-action="Unpark">
-        <input type="hidden" asp-for="LeavingVehicle.Id" />
-        <input type="submit" value="Unpark" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+
+    @*<form asp-action="Unpark">
+            <input type="hidden" asp-for="LeavingVehicle.Id" />
+            <input type="submit" value="Unpark" class="btn btn-danger" /> |
+            <a asp-action="Index">Back to List</a>
+        </form>*@
+
+    @{
+
+        <partial name="Receipt" />
+    }
 </div>
