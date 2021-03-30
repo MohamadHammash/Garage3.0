@@ -20,6 +20,9 @@ namespace Garage3._0.Models.ViewModels.VehiclesViewModels
         public DateTime ArrivalTime { get; set; }
         [Display(Name = "Owner")]
         public string MemberFullName { get; set; }
+        public string Membership => IsPro ? "Pro" : "Normal";
+        public bool IsPro { get; set; }
+
 
     }
 }

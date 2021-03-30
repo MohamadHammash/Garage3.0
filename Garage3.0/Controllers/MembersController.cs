@@ -145,12 +145,12 @@ namespace Garage3._0.Controllers
                 }
                 else
                 {
-                member.ProEndDate = DateTime.Today.AddMonths(1);
+                    member.ProEndDate = DateTime.Today.AddMonths(1);
                 }
 
 
 
-                    db.Add(member);
+                db.Add(member);
                 await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

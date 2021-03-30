@@ -147,14 +147,8 @@ namespace Garage3._0.Controllers
             {
                 var vehicle = mapper.Map<Vehicle>(viewModel);
                 vehicle.ArrivalTime = DateTime.Now;
-
-
-                //if (isTeenager())
-                //{
-                //    ModelState.AddModelError("MemberId", "Members under 18 are not allowed to park in the garage");
-
-                //}
-
+              //  vehicle.Member = default;
+                              
 
                 db.Add(vehicle);
                 await db.SaveChangesAsync();
