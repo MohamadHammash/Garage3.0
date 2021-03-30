@@ -29,15 +29,38 @@ namespace Garage3._0.Data
                 from => from.MapFrom(m => m.Vehicles.Count));
 
 
-            CreateMap<Vehicle, VehiclesListViewModel>();
-            CreateMap<Vehicle, VehiclesParkViewModel>()
-                 .ForMember(
-                dest => dest.MemberPersonnummer,
-                from => from.MapFrom(p => p.Member.Personnummer)
-                )
-                .ReverseMap();
+            CreateMap<Vehicle, VehiclesListViewModel>()
+                .ForMember(
+                dest => dest.IsPro,
+                from => from.MapFrom(
+                    v => IsPro(v.Member.ProEndDate)
+                    ));
 
+            CreateMap<VehiclesParkViewModel, Vehicle>()
+                .ForMember(
+                    dest => dest.Member, act => act.Ignore());
+
+            CreateMap<Vehicle, VehiclesParkViewModel>();
+               // .ReverseMap();
 
         }
+        private static bool IsPro(DateTime date)
+        {
+
+            DateTime mbshipDate = date;
+            DateTime now = DateTime.Now;
+            TimeSpan difference = now.Subtract(mbshipDate);
+            if (difference < TimeSpan.Zero)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+
     }
 }

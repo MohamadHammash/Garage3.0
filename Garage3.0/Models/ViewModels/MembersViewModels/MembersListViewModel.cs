@@ -12,6 +12,7 @@ namespace Garage3._0.Models.ViewModels.MembersViewModels
         [Display(Name = "Name")]
         public string FullName { get; set; }
         public string Personnummer { get; set; }
+        [Display(Name = "Vehicles owned")]
         public int VehiclesOwned { get; set; }
 
     }

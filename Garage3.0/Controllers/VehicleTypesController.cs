@@ -60,7 +60,7 @@ namespace Garage3._0.Controllers
             {
                 db.Add(vehicleType);
                 await db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(CreateSuccess));
             }
             return View(vehicleType);
         }
@@ -111,7 +111,7 @@ namespace Garage3._0.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(EditSuccess));
             }
             return View(vehicleType);
         }
@@ -142,12 +142,27 @@ namespace Garage3._0.Controllers
             var vehicleType = await db.VehicleTypes.FindAsync(id);
             db.VehicleTypes.Remove(vehicleType);
             await db.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(DeleteSuccess));
         }
 
         private bool VehicleTypeExists(int id)
         {
             return db.VehicleTypes.Any(e => e.Id == id);
+        }
+
+        public IActionResult EditSuccess()
+        {
+            return View();
+        }
+
+        public IActionResult CreateSuccess()
+        {
+            return View();
+        }
+
+        public IActionResult DeleteSuccess()
+        {
+            return View();
         }
     }
 }

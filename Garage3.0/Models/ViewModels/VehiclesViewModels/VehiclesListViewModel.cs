@@ -17,27 +17,15 @@ namespace Garage3._0.Models.ViewModels.VehiclesViewModels
         public VehicleType VehicleType { get; set; }
 
         [Display(Name = "Arrival Time")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MMMM-dd HH:mm}")]
         public DateTime ArrivalTime { get; set; }
         [Display(Name = "Owner")]
         public string MemberFullName { get; set; }
-
-        //public TimeSpan ParkingTime { get; set; }
-
-
-     public TimeSpan ParkingTime
-        {
-            get
-            {
-                return DateTime.Now - ArrivalTime;
-
-            }
-        }
-
-
-
-
-
-
+        public string Membership => IsPro ? "Pro" : "Normal";
+        public bool IsPro { get; set; }
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = @"{0:hh\:mm}")]
+        public TimeSpan ParkingTime => DateTime.Now - ArrivalTime;
 
 
 
