@@ -12,7 +12,7 @@ namespace Garage3._0.Models.Entities
        [Display(Name = "Type")]
         public string TypeName { get; set; }
         [Display(Name = "Spots needed")]
-        public int NumberOfSpots { get; set; }
+        public int NumberOfSpots { get; set; } = 0;
 
         // nav prop 
         public ICollection<Vehicle> Vehicles { get; set; }

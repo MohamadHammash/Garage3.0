@@ -248,7 +248,9 @@ namespace Garage3._0.Controllers
         public async Task<IActionResult> UnparkConfirmed(int id)
         {
             var vehicle = await db.Vehicles.FindAsync(id);
-            db.Vehicles.Remove(vehicle);
+           
+
+            db.Vehicles.Update(vehicle);
             await db.SaveChangesAsync();
             return RedirectToAction(nameof(DeleteSuccess));
         }
