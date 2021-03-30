@@ -58,6 +58,9 @@
             <div class="col-md-2 col-3 col-sm-3 text-dark ">
                 @Html.DisplayNameFor(model => model.Membership)
             </div>
+            <div class="col-md-2 col-3 col-sm-3 text-dark ">
+                @Html.DisplayNameFor(model => model.ParkingTime)
+            </div>
         </div>
     </div>
     <div class="container myTable legend">
@@ -80,6 +83,9 @@
             </div>
             <div class="col-md-2 col-3 col-sm-3">
                 @Html.DisplayFor(modelItem => item.Membership)
+            </div>
+            <div class="col-md-2 col-3 col-sm-3">
+                @Html.DisplayFor(modelItem => item.ParkingTime)
             </div>
             <div class="col-md-4 col-12 justify-content-center justify-content-md-between offset-sm-4 col-sm-4 offset-md-0">
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit |</a>
