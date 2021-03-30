@@ -33,7 +33,7 @@
 
 <div class="row">
     <div class="col-md-2 col-3 col-sm-3 text-dark ">
-        @Html.DisplayNameFor(model => model.MemberFullName)
+       @Html.DisplayNameFor(model => model.MemberFullName)
     </div>
     <div class="col-md-2 col-3 col-sm-3 text-dark ">
         @Html.DisplayNameFor(model => model.RegNr)
@@ -52,8 +52,8 @@
 
     <div class="row">
         <div class="col-md-2 col-3 col-sm-3">
-            @Html.DisplayFor(modelItem => item.MemberFullName)
-        </div>
+            <a asp-action="Details"  asp-route-id="@item.Id" asp-controller ="Members" >@Html.DisplayFor(modelItem => item.MemberFullName)</a>
+</div>
         <div class="col-md-2 col-3 col-sm-3 ">
             @Html.DisplayFor(modelItem => item.RegNr)
           @*  <a asp-action="Index" asp-route-sortOrder="@ViewData["RegisNrSortParm"]">@Html.DisplayNameFor(model => model.RegNr)</a>*@
