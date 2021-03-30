@@ -191,6 +191,8 @@ namespace Garage3._0.Controllers
                 try
                 {
                     db.Update(member);
+                    db.Entry(member).Property(x => x.MbShipRegDate).IsModified = false;
+                    db.Entry(member).Property(x => x.ProEndDate).IsModified = false;
                     await db.SaveChangesAsync();
 
                 }
@@ -230,7 +232,7 @@ namespace Garage3._0.Controllers
         }
 
         // POST: Members/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Remove")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveConfirmed(int id)
         {
@@ -267,6 +269,24 @@ namespace Garage3._0.Controllers
                 return false;
             }
             return true;
+        }
+        //public IActionResult Filter(MembersListViewModel viewModel)
+        //{
+        //    var members = string.IsNullOrWhiteSpace(viewModel.FullName) ?
+        //        db.Members :
+        //        db.Members.Where(m => (m.FirstName + " " + m.LastName).StartsWith(viewModel.FullName));
+
+        //    members = viewModel.FullName == null ?
+        //        members :
+        //        members.Where(V => V.FirstName + " " + V.LastName == viewModel.FullName);
+        //    var model = mapper.ProjectTo<MembersListViewModel>(members);
+        //    return View(nameof(Index), model);
+        //}
+        public async Task<IActionResult> SearchMember(string searchString)
+        {
+            var query = db.Members.Where(m => m.FirstName.StartsWith(searchString));
+            var model = mapper.ProjectTo<MembersListViewModel>(query);
+            return View(nameof(Index), await model.ToListAsync());
         }
 
     }

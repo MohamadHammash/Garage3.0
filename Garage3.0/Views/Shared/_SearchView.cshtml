@@ -1,5 +1,5 @@
 ﻿@*@model  VehiclesListViewModel*@
-
+@inject ITypeSelectService type
 
     <section class="search-sec mt-5">
         <div class="container">
@@ -10,17 +10,18 @@
                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                 <input type="text" class="form-control search-slt" placeholder="Enter First Name">
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            @*<div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                 <input type="text" class="form-control search-slt" placeholder="Enter Drop City">
-                            </div>
+                            </div>*@
                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                 <select class="form-control search-slt" id="exampleFormControlSelect1">
                                     <option>Select Vehicle</option>
                                     @*@foreach (var type in Model.TypeName)
+                                       
         {
             <option>@type</option>
         }*@
-
+                                   
                                     <option>Car</option>
                                     <option>Motorcycle</option>
                                     <option>Bus</option>

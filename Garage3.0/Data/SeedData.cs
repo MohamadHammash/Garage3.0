@@ -72,7 +72,7 @@ namespace Garage3._0.Data
                 {
                     Model = fake.Vehicle.Model(),
                     Brand = fake.Vehicle.Manufacturer(),
-                    Color = fake.Lorem.Word(),
+                    Color = fake.Commerce.Color(),
                     RegNr = getRegNr.GetRegNr(),
                     NumberOfWheels = fake.Random.Int(1, 10),
                     ArrivalTime = fake.Date.Recent(),

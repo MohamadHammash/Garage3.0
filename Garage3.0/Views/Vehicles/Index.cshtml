@@ -1,6 +1,5 @@
-﻿@*@model IEnumerable<Vehicle>*@
-@*@model IEnumerable<Garage3._0.Models.Entities.Vehicle>*@
-@model IEnumerable<VehiclesListViewModel>
+﻿@model IEnumerable<VehiclesListViewModel>
+@inject ITypeSelectService service
 
 
 @{
@@ -8,18 +7,38 @@
 }
 
 
-@{
-    <partial name="_SearchView" />
-}
+<section class="search-sec mt-5">
+    <div class="container">
+        <form asp-action="SearchVehicle" asp-controller="Vehicles">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <input name="searchString" type="text" class="form-control search-slt" placeholder="Enter lisence NO">
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <select name="type" asp-items="@await service.GetTypeAsync()" class="form-control search-slt">
+                            <option selected="selected" value="">Please select a type</option>
+                        </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <button type="submit" class="btn btn-danger wrn-btn"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
 
 
 <h1 class="text-warning text-center">Vehicles list</h1>
 
 <p>
-    <a asp-action="Park">Create New</a>
+    <a asp-action="Park" class="btn btn-warning">Park a new vehicle</a>
 </p>
 
-<form asp-action="Index" method="get">
+@*<form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
             Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
@@ -27,7 +46,7 @@
             <a asp-action="Index">Back to Full List</a>
         </p>
     </div>
-</form>
+</form>*@
 
 <div class="container myTable">
 

@@ -1,11 +1,32 @@
 ﻿@model IEnumerable<MembersListViewModel>
+@inject IMemberSelectService service
 
 @{ ViewData["Title"] = "Index"; }
 
 <h1 class="text-center text-warning">Members List</h1>
 
-@{
-                <partial name="_SearchView" /> }
+@*@{
+                <partial name="_SearchView" /> }*@
+@*<partial name="FilterPartial" model=""/>*@
+
+<section class="search-sec mt-5">
+    <div class="container">
+        <form asp-action="SearchMember" asp-controller="Members">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <input name="searchString" type="text" class="form-control search-slt" placeholder="Enter Name">
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <button type="submit" class="btn btn-danger wrn-btn">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
 <p>
     <a asp-action="Add" class="btn btn-warning">Add New</a>
 </p>
