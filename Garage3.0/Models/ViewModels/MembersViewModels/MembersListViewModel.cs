@@ -15,5 +15,13 @@ namespace Garage3._0.Models.ViewModels.MembersViewModels
         [Display(Name = "Vehicles owned")]
         public int VehiclesOwned { get; set; }
 
+        //statistics
+        [Display(Name = "Available Vehicles")]
+        public int AvailableVehicles { get; set; }
+
+        [Display(Name = "Available ParkingSpot")]
+        public int AvailableParkingSpot { get; set; }
+
+
     }
 }

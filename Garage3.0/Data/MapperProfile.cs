@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Garage3._0.Models.Entities;
 using Garage3._0.Models.ViewModels.MembersViewModels;
+using Garage3._0.Models.ViewModels.StatisticsViewModels;
 using Garage3._0.Models.ViewModels.VehiclesViewModels;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,6 @@ namespace Garage3._0.Data
                 dest => dest.VehiclesOwned,
                 from => from.MapFrom(m => m.Vehicles.Count));
 
-
             CreateMap<Vehicle, VehiclesListViewModel>()
                 .ForMember(
                 dest => dest.IsPro,
@@ -41,9 +41,32 @@ namespace Garage3._0.Data
                     dest => dest.Member, act => act.Ignore());
 
             CreateMap<Vehicle, VehiclesParkViewModel>();
-               // .ReverseMap();
+            // .ReverseMap();
+
+
+
+            //CreateMap<Member, StatisticsViewModel>()
+            //    .ForMember(
+            //    dest => dest.AvailableVehicles,
+            //    from => from.MapFrom(m => m.Vehicles.Count));
+
+            //CreateMap<Vehicle, StatisticsViewModel>()
+            //   .ForMember(
+            //   dest => dest.AvailableParkingSpot,
+            //   from => from.MapFrom(v => v.ParkingSpots.Count));
+
+
+
+
 
         }
+
+
+
+
+
+
+
         private static bool IsPro(DateTime date)
         {
 

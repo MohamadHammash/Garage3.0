@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MembersListViewModel>
+
+@{ ViewData["Title"] = "Statistics"; }
+
+<h1 class="text-center text-warning">Members List</h1>
+
+@*@{
+    <partial name="_SearchView" /> }*@
+@*<partial name="FilterPartial" model=""/>*@
+
+<div class="container myTable">
+
+    <div class="row">
+        <div class="col-3 text-dark h6 text-left">
+            @Html.DisplayNameFor(model => model.AvailableParkingSpot)
+        </div>
+        <div class="col-3 text-dark h6 text-left">
+            @Html.DisplayNameFor(model => model.AvailableVehicles)
+        </div>
+
+    </div>
+</div>
+<div class="container myTable legend">
+    @foreach (var item in Model)
+    {
+
+        <div class="row">
+          
+            <div class="col-3">
+                @Html.DisplayFor(modelItem => item.AvailableParkingSpot)
+            </div>
+            <div class=" col-2">
+                @Html.DisplayFor(modelItem => item.AvailableVehicles)
+            </div>
+            <div class="col-md-4 col-12 justify-content-center justify-content-md-between offset-sm-4 col-sm-4 offset-md-0">
+                <ul class="list-group list-group-horizontal bg-transparent justify-content-between ">
+                    <li class="list-group-item bg-transparent border-0 text-dark "><a asp-action="Edit" asp-route-id="@item.Id">Edit</a></li>
+                    <li class="list-group-item bg-transparent border-0 text-dark "><a asp-action="Details" asp-route-id="@item.Id">Details</a></li>
+                    <li class="list-group-item bg-transparent border-0 text-dark "><a asp-action="Remove" asp-route-id="@item.Id">Remove</a></li>
+                </ul>
+            </div>
+        </div>
+    }
+</div>
+
+
