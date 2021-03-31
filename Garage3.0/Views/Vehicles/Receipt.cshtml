@@ -82,7 +82,7 @@
                             @Html.DisplayFor(model => model.LeavingVehicle.Model)
                         </dd>
                         <dt class="col-sm-6">
-                            Total parking (hours)
+                            @Html.DisplayNameFor(model => model.ParkingTime)
                         </dt>
                         <dd class="col-sm-10">
                             @Html.DisplayFor(model => model.ParkingTime)
@@ -92,6 +92,12 @@
                         </dt>
                         <dd class="col-sm-10">
                             @Html.DisplayFor(model => model.ParkingCost)
+                        </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.SavedAsPro)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.SavedAsPro)
                         </dd>
                     </dl>
 
