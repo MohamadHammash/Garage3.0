@@ -285,18 +285,7 @@ namespace Garage3._0.Controllers
             }
             return true;
         }
-        //public IActionResult Filter(MembersListViewModel viewModel)
-        //{
-        //    var members = string.IsNullOrWhiteSpace(viewModel.FullName) ?
-        //        db.Members :
-        //        db.Members.Where(m => (m.FirstName + " " + m.LastName).StartsWith(viewModel.FullName));
-
-        //    members = viewModel.FullName == null ?
-        //        members :
-        //        members.Where(V => V.FirstName + " " + V.LastName == viewModel.FullName);
-        //    var model = mapper.ProjectTo<MembersListViewModel>(members);
-        //    return View(nameof(Index), model);
-        //}
+        
         public async Task<IActionResult> SearchMember(string searchString)
         {
             var query = string.IsNullOrWhiteSpace(searchString) ?
