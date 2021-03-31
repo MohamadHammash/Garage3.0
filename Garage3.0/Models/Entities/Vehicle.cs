@@ -19,7 +19,7 @@ namespace Garage3._0.Models.Entities
         public string Color { get; set; }
         [Required]
         [Display(Name = "License number")]
-        [Remote("RegNumExists", "ParkedVehicles", AdditionalFields = "Id")]
+        [Remote("RegNumExists", "Vehicles", AdditionalFields = "Id")]
         [RegularExpression("[A-Za-z]{3}[0-9]{2}[A-Za-z0-9]{1}", ErrorMessage = "Not a valid Registration Number.")]
         public string RegNr { get; set; }
         [Display(Name = "Number of wheels")]
