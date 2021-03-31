@@ -58,7 +58,14 @@ namespace Garage3._0.Data
                 };
                 members.Add(member);
             }
-
+            members.Add(new Member()
+            {
+                FirstName = "Rigmor",
+                LastName = "Mortis",
+                Personnummer = "19210101-7172",
+                MbShipRegDate = new DateTime(2020,1,1),
+                ProEndDate = new DateTime(2020,1,31)
+            }); 
             return members;
         }
         private static List<Vehicle> GetVehicles()

@@ -37,6 +37,7 @@ namespace Garage3._0.Models.Entities
         // nav prop
         public ICollection<ParkingSpot> ParkingSpots { get; set; }
         public Member Member { get; set; }
+        [Display(Name = "Vehicle Type")]
         public VehicleType VehicleType { get; set; }
        
 

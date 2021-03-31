@@ -11,44 +11,46 @@ namespace Garage3._0.Models.ViewModels.VehiclesViewModels
     {
         private const double initialFee = 50.0;
         private const double pricePerHour = 6.0;
+        private double savedAsPro;
         public Vehicle LeavingVehicle { get; set; }
 
         public DateTime LeavingTime { get; set; }
 
+        [Display(Name = "Parking Time")]
         [DisplayFormat(DataFormatString = "{0:hh':'mm}")]
         public TimeSpan ParkingTime { get; }
         public int NoOfSpots { get; set; }
-        public double SavedAsPro { get; set; }
+        [Display(Name = "Savings")]
+        public string SavedAsPro 
+        { 
+            get
+            {
+                return String.Format("{0:C}", savedAsPro);
+            }
+        }
 
+        [Display(Name = "Parking Cost")]
         public string ParkingCost
         {
             get
             {
-                double cost;
-                double tempCost = 0.0;
-                switch (NoOfSpots)
+                var cost = NoOfSpots switch
                 {
-                    case 1:
-                        tempCost = calculateCost(1.0, 1.0);
-                        break;
-                    case 2:
-                        tempCost = calculateCost(1.3, 1.4);
-                        break;
-                    default:
-                        tempCost = calculateCost(1.6, 1.5);
-                        break;
-                }
-                cost = Math.Round(tempCost * 100) / 100;
-
-                string formattedForCurrency = String.Format("{0:C}", cost);
-                return formattedForCurrency;
+                    0 => 0,
+                    1 => CalculateCost(1.0, 1.0),
+                    2 => CalculateCost(1.3, 1.4),
+                    _ => CalculateCost(1.6, 1.5),
+                };
+                cost = Math.Round(cost * 100) / 100;
+                //string formattedForCurrency = 
+                return String.Format("{0:C}", cost);
             }
         }
 
-        private double calculateCost(double incInitialFactor, double incHourFactor)
+        private double CalculateCost(double incInitialFactor, double incHourFactor)
         {
             double originalCost = initialFee*incInitialFactor + pricePerHour*incHourFactor*ParkingTime.TotalHours;
-            double totalCost = originalCost;
+            double totalCost;
             if (LeavingVehicle.Member.ProEndDate > DateTime.Now)
             {
                 // Pro member
@@ -57,7 +59,7 @@ namespace Garage3._0.Models.ViewModels.VehiclesViewModels
                 if (NoOfSpots >= 2) discountRunningFee = 0.90;
                 totalCost = initialFee * incInitialFactor * discountInitialFee +
                             pricePerHour * incHourFactor * ParkingTime.TotalHours * discountRunningFee;
-                SavedAsPro = Math.Round((originalCost - totalCost) * 100) / 100;
+                savedAsPro = Math.Round((originalCost - totalCost) * 100) / 100;
                 return totalCost;
             }
             return originalCost;
@@ -69,7 +71,6 @@ namespace Garage3._0.Models.ViewModels.VehiclesViewModels
             ParkingTime = DateTime.Now - LeavingVehicle.ArrivalTime;
             NoOfSpots = leavingVehicle.VehicleType.NumberOfSpots;
             NoOfSpots = NoOfSpots > 0 ? NoOfSpots : 0;
-            SavedAsPro = 0.0;
         }
     }
 }
